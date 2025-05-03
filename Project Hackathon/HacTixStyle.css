@@ -1,213 +1,211 @@
 body{
-    .container {
-        max-width: 100%;
-        margin: 0 auto;
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;
-    }   
-    /* Scrolling */
-    .scroll-container {
-        height: 100vh;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
+  .container {
+      max-width: 100%;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+  }   
+  /* Scrolling */
+  .scroll-container {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      }
+  .screen {
+      scroll-snap-align: start;
+      height: 100vh;
+      display: flex;
+      font-size: 2rem;
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      }
+
+  /* header */
+  #box-header {
+      width: 100%;
+      height: 107px;
+      border-radius: 0px 0px 42px 42px;
+      background: #2270B5;
+      /* opacity: 80%; */
+      position: fixed;
+      top: 0;
+      left: 0;
+      }
+  .teks-header {
+      font-family: 'inter','Arial', sans-serif;
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: 800;
+      position: fixed;
+      top: -12px;
+      left: 5%;
+      }
+  /* Banner */
+  .background-vidio {
+      width: 100vw;
+      height: 100vh;
+      position: static;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      }
+  .background-vidio2 {
+      width: 100%;
+      height: 100%;
+      background: #5f6743;
+      opacity: 20%;
+      position: static;
+      top: 0;
+      left: 0;
+      }
+  
+  /* Page Pemesanan */
+  .box-pemesanan {
+      width: 900px;
+      height: 406px;
+      padding: 50px;
+      background-color: #2270B5;
+      border-radius: 20px;
+      margin: 140px auto 0 auto;
+      }
+  
+  .teks-pemesanan {
+      font-family: 'inter','Arial', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color : #ffffff;
+      margin-top: -20px;
+      margin-left: -20px;
+      }
+      /* data input */
+        .input-group {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
         }
-    .screen {
-        scroll-snap-align: start;
-        height: 100vh;
-        display: flex;
-        font-size: 2rem;
-        background-color: #f0f0f0;
-        border-bottom: 1px solid #ccc;
+
+        .input-group .field {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
         }
 
-    /* header */
-    #box-header {
-        width: 100%;
-        height: 107px;
-        border-radius: 0px 0px 42px 42px;
-        background: #2270B5;
-        /* opacity: 80%; */
-        position: fixed;
-        top: 0;
-        left: 0;
-        }
-    .teks-header {
-        font-family: 'inter','Arial', sans-serif;
-        color: #ffffff;
-        font-size: 40px;
-        font-weight: 800;
-        position: fixed;
-        top: -12px;
-        left: 5%;
-        }
-    /* Banner */
-    .background-vidio {
-        width: 100vw;
-        height: 100vh;
-        position: static;
-        object-fit: cover;
-        top: 0;
-        left: 0;
-        }
-    .background-vidio2 {
-        width: 100%;
-        height: 100%;
-        background: #5f6743;
-        opacity: 20%;
-        position: static;
-        top: 0;
-        left: 0;
-        }
-    
-    /* Page Pemesanan */
-    .box-pemesanan {
-        width: 900px;
-        height: 406px;
-        padding: 50px;
-        background-color: #2270B5;
-        border-radius: 20px;
-        margin: 140px auto 0 auto;
-        }
-    
-    .teks-pemesanan {
-        font-family: 'inter','Arial', sans-serif;
-        font-size: 28px;
-        font-weight: 800;
-        color : #ffffff;
-        margin-top: -20px;
-        margin-left: -20px;
-        }
-        /* data input */
-          .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-          }
-
-          .input-group .field {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-          }
-
-          .input-group label {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 20px;
-            color : #ffffff;
-            margin-bottom: 5px;
-            font-weight: bold;
-          }
-          
-          .input-group input {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 16px;
-            color : black;
-            font-weight: bold;
-            padding: 8px;
-            border-radius: 8px;
-            border: none;
-          }
-
-          .input-group select {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 16px;
-            color : black;
-            font-weight: bold;
-            padding: 8px;
-            border-radius: 8px;
-            border: none;
-            border: 1px solid #ccc;
-          }
-          /* data jumlah penumpang */
-          .input-passengers {
-            background: #D9D9D9;
-            border-radius: 0 0 8px 8px;
-            border: none;
-            border: 1px solid #ccc;
-            width: 300px;
-          }
-
-          .number-passengers {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 16px;
-            color : black;
-            font-weight: bold;
-            padding: 8px;
-          }
-
-          .passengers-in {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 16px;
-            color : black;
-            font-weight: bold;
-            background: #ffffff;
-            border-radius: 8px 8px 0 0;
-            border: none;
-            border: 1px solid #ccc;
-            width: 300px;
-            height: 28px;
-          }
-
-          .passengers-cap {
-            margin-left: 50;
-          }
-
-          .passengers{
-            display: flex;
-            gap: 10px;
-          }
-
-          .passengers label {
-            font-family: 'inter','Arial', sans-serif;
-            font-size: 20px;
-            color : #ffffff;
-            margin-bottom: 5px;
-            font-weight: bold;
-          }
-
-          .number-passengers label{
-            color: black;
-            margin-left: 50px;
-          }
-
-          .calculation1 {
-            width: 20px;
-            left: 20px;
-            margin-left: 50px;
-          }
-
-          .calculation2 {
-            width: 20px;
-            left: 20px;
-            margin-left: 29px;
-          }
-          
-          .counting {
-            margin-left: 30px;
-            margin-right: 30px;
-          }
-
-        /* button checkout */
-        .checkout-btn {
-          background: white;
-          color: black;
+        .input-group label {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 20px;
+          color : #ffffff;
+          margin-bottom: 5px;
           font-weight: bold;
-          padding: 10px 20px;
+        }
+        
+        .input-group input {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 16px;
+          color : black;
+          font-weight: bold;
+          padding: 8px;
+          border-radius: 8px;
           border: none;
-          border-radius: 10px;
-          width: 20%;
-          margin-top: 45px;
-          margin-left: 40%;
-          cursor: pointer;
-          transition: 0.3s;
-          display: block;
-          }
-          
-        .checkout-btn:hover {
-          background-color: #e5e5e5;
-          }
+        }
+
+        .input-group select {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 16px;
+          color : black;
+          font-weight: bold;
+          padding: 8px;
+          border-radius: 8px;
+          border: none;
+          border: 1px solid #ccc;
+        }
+        /* data jumlah penumpang */
+        .input-passengers {
+          background: #D9D9D9;
+          border-radius: 0 0 8px 8px;
+          border: none;
+          border: 1px solid #ccc;
+          width: 300px;
+        }
+
+        .number-passengers {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 16px;
+          color : black;
+          font-weight: bold;
+          padding: 8px;
+        }
+
+        .passengers-in {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 16px;
+          color : black;
+          font-weight: bold;
+          background: #ffffff;
+          border-radius: 8px 8px 0 0;
+          border: none;
+          border: 1px solid #ccc;
+          width: 300px;
+          height: 28px;
+        }
+
+        .passengers-cap {
+          margin-left: 50;
+        }
+
+        .passengers{
+          display: flex;
+          gap: 10px;
+        }
+
+        .passengers label {
+          font-family: 'inter','Arial', sans-serif;
+          font-size: 20px;
+          color : #ffffff;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+
+        .number-passengers label{
+          color: black;
+          margin-left: 50px;
+        }
+
+        .calculation1 {
+          width: 20px;
+          left: 20px;
+          margin-left: 50px;
+        }
+
+        .calculation2 {
+          width: 20px;
+          left: 20px;
+          margin-left: 29px;
+        }
+        
+        .counting {
+          margin-left: 30px;
+          margin-right: 30px;
+        }
+
+      /* button checkout */
+      .checkout-btn {
+        background: white;
+        color: black;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        width: 20%;
+        margin-top: 45px;
+        margin-left: 40%;
+        cursor: pointer;
+        transition: 0.3s;
+        display: block;
+        }
+        
+      .checkout-btn:hover {
+        background-color: #e5e5e5;
+        }
 }
-
-

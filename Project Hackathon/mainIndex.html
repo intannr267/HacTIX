@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <Title>HacTIX</Title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HacTIX</title>
     <link href="HacTixStyle.css" rel="stylesheet"/>
 </head>
 <body>
-    <header id="box-header" >
+    <header id="box-header">
         <h1 class="teks-header">HacTIX</h1>
     </header>
+    
     <div class="scroll-container container">
         <section class="screen">
             <div>
@@ -19,75 +22,72 @@
             <div class="box-pemesanan">
                 <h2 class="teks-pemesanan">Pemesanan Tiket</h2>
 
-                  <!-- Pilih Keberangkatan dan Tujuan-->
-                  <div class="input-group">
+                <!-- Pilih Keberangkatan dan Tujuan -->
+                <div class="input-group">
                     <div class="field">
                         <label>Dari</label>
-                        <!-- <input type="text" value="Rawa Buntu"> -->
-                        <select>
+                        <select name="dari">
                             <option value="">Pilih Kota</option>
                             <option value="Manggarai">Manggarai</option>
                             <option value="Kota Tua">Kota Tua</option>
                             <option value="Tanah Abang">Tanah Abang</option>
-                          </select>
+                        </select>
                     </div>
                     <div class="field">
                         <label>Ke</label>
-                        <!-- <input type="text" value="Tanah Abang"> -->
-                        <select>
+                        <select name="ke">
                             <option value="">Pilih Kota</option>
                             <option value="Manggarai">Manggarai</option>
                             <option value="Kota Tua">Kota Tua</option>
                             <option value="Rawa Buntu">Rawa Buntu</option>
-                          </select>
+                        </select>
                     </div>
+                </div>
 
-                  </div>
-            
-                  <!-- Tanggal Keberangkatan -->
-                  <div class="input-group">
+                <!-- Tanggal Keberangkatan -->
+                <div class="input-group">
                     <div class="field">
                         <label>Tanggal</label>
-                        <input type="date" value="2025-01-01">
+                        <input type="date" name="tanggal" value="2025-01-01">
                     </div>   
                     <div class="field">
                         <label>Sampai</label>
-                        <input type="date" value="2025-01-03">
+                        <input type="date" name="sampai" value="2025-01-03">
                     </div>
-                  </div>
+                </div>
 
-                  <!-- Jumlah Penumpang -->
-                  <div class="passengers">
+                <!-- Jumlah Penumpang -->
+                <div class="passengers">
                     <label>Jumlah Penumpang</label>
-                  </div>
-                  <div class="passengers-in">
+                </div>
+                <div class="passengers-in">
                     <span class="passengers-cap" id="p-Dewasa">Dewasa: </span>
                     <span class="passengers-cap" id="p-Anak">Anak: </span>
-                  </div>
-                  <div class="input-passengers">
+                </div>
+                <div class="input-passengers">
                     <div>
-                      <div class="number-passengers">
-                        <label>Anak</label>
-                          <button class="calculation1" id="btnPenguranganA">-</button>
-                          <span class="counting" id="jumlahAnak">0</span>
-                          <button id="btnPenambahanA">+</button>
-                      </div>
+                        <div class="number-passengers">
+                            <label>Anak</label>
+                            <button class="calculation1" id="btnPenguranganA">-</button>
+                            <span class="counting" id="jumlahAnak">0</span>
+                            <button id="btnPenambahanA">+</button>
+                        </div>
 
-                      <div class="number-passengers">
-                        <label>Dewasa</label>
-                          <button class="calculation2" id="btnPenguranganD">-</button>
-                          <span class="counting" id="jumlahDewasa">0</span>
-                          <button id="btnPenambahanD">+</button>
-                      </div>
+                        <div class="number-passengers">
+                            <label>Dewasa</label>
+                            <button class="calculation2" id="btnPenguranganD">-</button>
+                            <span class="counting" id="jumlahDewasa">0</span>
+                            <button id="btnPenambahanD">+</button>
+                        </div>
                     </div>
-                  </div>
-    
-                  <button class="checkout-btn">Pesan</button>
+                </div>
+
+                <!-- Tombol Pesan -->
+                <button class="checkout-btn" id="btnPesan">Pesan</button>
             </div>
         </section>
-
-        </section>
     </div>
+
     <script src="HactixDoom.js"></script>
 </body>
 </html>
