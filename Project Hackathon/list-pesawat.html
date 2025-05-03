@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Pesawat</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .flight-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      padding: 20px;
+    }
+    .flight-card h3 {
+      margin-top: 0;
+    }
+    button {
+      background-color: #2e86de;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Daftar Penerbangan</h1>
+  <div id="infoPemesanan"></div>
+  <div id="daftarPesawat"></div>
+
+  <script>
+    // Ambil data dari sessionStorage
+    const data = JSON.parse(sessionStorage.getItem("pemesanan"));
+
+    if (!data) {
+      document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
+    } else {
+      // Tampilkan informasi pemesanan
+      document.getElementById("infoPemesanan").innerHTML = `
+        <p><strong>Dari:</strong> ${data.asal}</p>
+        <p><strong>Ke:</strong> ${data.tujuan}</p>
+        <p><strong>Tanggal:</strong> ${data.tanggal}</p>
+        <p><strong>Dewasa:</strong> ${data.jumlahDewasa}, <strong>Anak:</strong> ${data.jumlahAnak}</p>
+        <hr/>
+      `;
+
+      // Contoh daftar pesawat (bisa kamu ganti sesuai data asli atau dari API)
+      const daftarPesawat = [
+        {
+          maskapai: "Garuda Indonesia",
+          kode: "GA123",
+          jam: "08:00",
+          harga: 1200000
+        },
+        {
+          maskapai: "AirAsia",
+          kode: "QZ456",
+          jam: "10:30",
+          harga: 950000
+        },
+        {
+          maskapai: "Lion Air",
+          kode: "JT789",
+          jam: "13:15",
+          harga: 850000
+        }
+      ];
+
+      const container = document.getElementById("daftarPesawat");
+
+      // Tampilkan setiap pesawat
+      daftarPesawat.forEach(pesawat => {
+        const card = document.createElement("div");
+        card.className = "flight-card";
+        card.innerHTML = `
+          <h3>${pesawat.maskapai}</h3>
+          <p><strong>Kode:</strong> ${pesawat.kode}</p>
+          <p><strong>Jam Keberangkatan:</strong> ${pesawat.jam}</p>
+          <p><strong>Harga per Penumpang:</strong> Rp ${pesawat.harga.toLocaleString("id-ID")}</p>
+          <button onclick="alert('Anda memilih ${pesawat.maskapai} - ${pesawat.kode}')">Pilih</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
