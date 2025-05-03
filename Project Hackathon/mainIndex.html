@@ -19,19 +19,32 @@
             <div class="box-pemesanan">
                 <h2 class="teks-pemesanan">Pemesanan Tiket</h2>
 
+                  <!-- Pilih Keberangkatan dan Tujuan-->
                   <div class="input-group">
                     <div class="field">
                         <label>Dari</label>
-                        <input type="text" value="Rawa Buntu">
+                        <!-- <input type="text" value="Rawa Buntu"> -->
+                        <select>
+                            <option value="">Pilih Kota</option>
+                            <option value="Manggarai">Manggarai</option>
+                            <option value="Kota Tua">Kota Tua</option>
+                            <option value="Tanah Abang">Tanah Abang</option>
+                          </select>
                     </div>
-
                     <div class="field">
                         <label>Ke</label>
-                        <input type="text" value="Tanah Abang">
+                        <!-- <input type="text" value="Tanah Abang"> -->
+                        <select>
+                            <option value="">Pilih Kota</option>
+                            <option value="Manggarai">Manggarai</option>
+                            <option value="Kota Tua">Kota Tua</option>
+                            <option value="Rawa Buntu">Rawa Buntu</option>
+                          </select>
                     </div>
 
                   </div>
             
+                  <!-- Tanggal Keberangkatan -->
                   <div class="input-group">
                     <div class="field">
                         <label>Tanggal</label>
@@ -42,19 +55,38 @@
                         <input type="date" value="2025-01-03">
                     </div>
                   </div>
-            
-                  <div class="input-group">
+
+                  <!-- Jumlah Penumpang -->
+                  <div class="passengers">
                     <label>Jumlah Penumpang</label>
-                    <div class="passenger-info">
-                      <span>Dewasa: 1</span>
-                      <span>Anak: 0</span>
+                  </div>
+                  <div class="passengers-in">
+                    <span class="passengers-cap">Dewasa: </span>
+                    <span class="passengers-cap">Anak: </span>
+                  </div>
+                  <div class="input-passengers">
+                    <div>
+                      <div class="number-passengers">
+                        <label>Anak</label>
+                          <button class="calculation1" id="btnPenguranganA">-</button>
+                          <span class="counting" id="jumlahAnak">0</span>
+                          <button id="btnPenambahanA">+</button>
+                      </div>
+
+                      <div class="number-passengers">
+                        <label>Dewasa</label>
+                          <button class="calculation2" id="btnPenguranganD">-</button>
+                          <span class="counting" id="jumlahDewasa">0</span>
+                          <button id="btnPenambahanD">+</button>
+                      </div>
                     </div>
                   </div>
-            
-                  <button class="checkout-btn">Buat Pemesanan</button>
+    
+                  <button class="checkout-btn">Pesan</button>
             </div>
         </section>
-        <section class="screen">Layar 3</section>
+
+        </section>
     </div>
 
 </body>
