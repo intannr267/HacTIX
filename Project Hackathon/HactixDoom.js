@@ -1,14 +1,14 @@
 //Anak - Tombol penambahan dan pengurangan
 let jumlahAnak = 0
 
+const paragrafAnak = document.getElementById('p-Anak')
+const spanJumlahAnak = document.getElementById('jumlahAnak')
 const buttonTambahA = document.getElementById('btnPenambahanA');
 const buttonKurangA = document.getElementById('btnPenguranganA');
-const paragrafAnak = document.getElementById('paragrafAnak')
-const spanJumlahAnak = document.getElementById('jumlahAnak')
 
 function updateTampilAnak () {
     spanJumlahAnak.innerText = jumlahAnak;
-    paragrafAnak.innerText = "Jumlah tiket anak: " + jumlahAnak
+    paragrafAnak.innerText = "Anak: " + jumlahAnak
 }
 
 buttonTambahA.addEventListener('click', function () {
@@ -26,14 +26,14 @@ buttonKurangA.addEventListener('click', function () {
 //Dewasa - Tombol penambahan dan pengurangan
 let jumlahDewasa = 0
 
-const paragrafDewasa = document.getElementById('paragrafDewasa')
+const paragrafDewasa = document.getElementById('p-Dewasa')
 const spanJumlahDewasa = document.getElementById('jumlahDewasa')
 const buttonTambahD = document.getElementById('btnPenambahanD');
 const buttonKurangD = document.getElementById('btnPenguranganD');
 
 function updateTampilDewasa () {
     spanJumlahDewasa.innerText = jumlahDewasa;
-    paragrafDewasa.innerText = "Jumlah tiket dewasa: " + jumlahDewasa
+    paragrafDewasa.innerText = "Dewasa: " + jumlahDewasa
 }
 
 buttonTambahD.addEventListener('click', function () {
