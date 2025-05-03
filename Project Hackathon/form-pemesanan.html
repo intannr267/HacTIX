@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Pemesanan Penumpang</title>
+  <link rel="stylesheet" href="form-pemesanan-style.css">
+</head>
+<body>
+
+  <div class="summary" id="summaryInfo"></div>
+
+  <form id="form-penumpang">
+    <div id="container-penumpang" class="passenger-form"></div>
+    <button type="submit">Lanjutkan</button>
+  </form>
+
+  <script>
+    const data = JSON.parse(sessionStorage.getItem("pemesanan"));
+    const container = document.getElementById("container-penumpang");
+    const summaryInfo = document.getElementById("summaryInfo");
+
+    if (!data) {
+      document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
+    } else {
+      // Tampilkan ringkasan pesawat & pemesanan
+      const pesawat = data.pesawatDipilih;
+      summaryInfo.innerHTML = `
+        <h2>Ringkasan Penerbangan</h2>
+        <p><strong>Dari:</strong> ${data.dari}</p>
+        <p><strong>Ke:</strong> ${data.ke}</p>
+        <p><strong>Tanggal:</strong> ${data.tanggal}</p>
+        ${data.tanggalKembali ? `<p><strong>Tanggal Kembali:</strong> ${data.tanggalKembali}</p>` : ""}
+        <p><strong>Pesawat:</strong> ${pesawat.maskapai} (${pesawat.kode})</p>
+        <p><strong>Jam Keberangkatan:</strong> ${pesawat.jam}</p>
+        <p><strong>Harga per Penumpang:</strong> Rp ${pesawat.harga.toLocaleString("id-ID")}</p>
+        <p><strong>Penumpang:</strong> ${data.jumlahDewasa} Dewasa, ${data.jumlahAnak} Anak</p>
+      `;
+
+      let index = 1;
+
+      // Dewasa
+      for (let i = 0; i < data.jumlahDewasa; i++) {
+        const div = document.createElement("div");
+        div.className = "form-group";
+        div.innerHTML = `
+          <h3>Penumpang Dewasa ${index}</h3>
+          <label>Nama Lengkap</label>
+          <input type="text" name="nama_d_${i}" required />
+          <label>NIK</label>
+          <input type="text" name="nik_d_${i}" required pattern="\\d{16}" placeholder="16 digit NIK" />
+        `;
+        container.appendChild(div);
+        index++;
+      }
+
+      // Anak
+      for (let i = 0; i < data.jumlahAnak; i++) {
+        const div = document.createElement("div");
+        div.className = "form-group";
+        div.innerHTML = `
+          <h3>Penumpang Anak ${index}</h3>
+          <label>Nama Lengkap</label>
+          <input type="text" name="nama_a_${i}" required />
+        `;
+        container.appendChild(div);
+        index++;
+      }
+    }
+
+    // Submit form
+    document.getElementById("form-penumpang").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const entries = Array.from(formData.entries());
+      console.log("Data penumpang:", entries);
+
+      sessionStorage.setItem("dataPenumpang", JSON.stringify(entries));
+
+      alert("Data penumpang berhasil disimpan.");
+    });
+  </script>
+
+</body>
+</html>
