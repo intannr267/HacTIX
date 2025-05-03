@@ -1,70 +1,54 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Daftar Pesawat</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-    .flight-card {
-      background: #fff;
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-      padding: 20px;
-    }
-    .flight-card h3 {
-      margin-top: 0;
-    }
-    button {
-      background-color: #2e86de;
-      color: white;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Penerbangan</title>
+  <link rel="stylesheet" href="HacTixStyle.css"/>
 </head>
 <body>
+
   <h1>Daftar Penerbangan</h1>
   <div id="infoPemesanan"></div>
   <div id="daftarPesawat"></div>
 
+  <!-- Tombol kembali akan tetap di bawah layar -->
+  <button class="back-btn" onclick="window.history.back()">Kembali</button>
+
   <script>
-    // Ambil data dari sessionStorage
+    // Ambil data pemesanan dari sessionStorage
     const data = JSON.parse(sessionStorage.getItem("pemesanan"));
 
     if (!data) {
       document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
     } else {
-      // Tampilkan informasi pemesanan
+      // Tampilkan ringkasan pemesanan
       document.getElementById("infoPemesanan").innerHTML = `
-        <p><strong>Dari:</strong> ${data.asal}</p>
-        <p><strong>Ke:</strong> ${data.tujuan}</p>
+    <div class="info-box">
+      <p><strong>Dari:</strong> ${data.dari}</p>
+        <p><strong>Ke:</strong> ${data.ke}</p>
         <p><strong>Tanggal:</strong> ${data.tanggal}</p>
         <p><strong>Dewasa:</strong> ${data.jumlahDewasa}, <strong>Anak:</strong> ${data.jumlahAnak}</p>
         <hr/>
       `;
 
-      // Contoh daftar pesawat (bisa kamu ganti sesuai data asli atau dari API)
+      // Contoh daftar pesawat
       const daftarPesawat = [
         {
-          maskapai: "Garuda Indonesia",
-          kode: "GA123",
+          maskapai: "HACTIV AIR",
+          kode: "HA123",
           jam: "08:00",
           harga: 1200000
         },
         {
-          maskapai: "AirAsia",
-          kode: "QZ456",
+          maskapai: "Air HACTIV",
+          kode: "AH456",
           jam: "10:30",
           harga: 950000
         },
         {
-          maskapai: "Lion Air",
-          kode: "JT789",
+          maskapai: "HACTIV JET",
+          kode: "HJ789",
           jam: "13:15",
           harga: 850000
         }
@@ -81,11 +65,26 @@
           <p><strong>Kode:</strong> ${pesawat.kode}</p>
           <p><strong>Jam Keberangkatan:</strong> ${pesawat.jam}</p>
           <p><strong>Harga per Penumpang:</strong> Rp ${pesawat.harga.toLocaleString("id-ID")}</p>
-          <button onclick="alert('Anda memilih ${pesawat.maskapai} - ${pesawat.kode}')">Pilih</button>
+          <button onclick="pilihPesawat('${pesawat.maskapai}', '${pesawat.kode}', '${pesawat.jam}', ${pesawat.harga})">Pilih</button>
         `;
         container.appendChild(card);
       });
     }
+
+    // Fungsi untuk memilih pesawat
+    function pilihPesawat(maskapai, kode, jam, harga) {
+      // Menyimpan data pesawat yang dipilih di sessionStorage
+      const pesawatDipilih = { maskapai, kode, jam, harga };
+
+      // Simpan pemesanan yang sudah ditambahkan pesawatnya
+      const pemesanan = JSON.parse(sessionStorage.getItem("pemesanan"));
+      pemesanan.pesawatDipilih = pesawatDipilih;
+      sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
+     
+      // Redirect ke form pemesanan
+      window.location.href = "form-pemesanan.html";
+    }
   </script>
+
 </body>
 </html>

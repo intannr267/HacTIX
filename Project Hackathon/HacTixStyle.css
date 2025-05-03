@@ -64,7 +64,7 @@ body{
   /* Page Pemesanan */
   .box-pemesanan {
       width: 900px;
-      height: 406px;
+      height: 480px;
       padding: 50px;
       background-color: #2270B5;
       border-radius: 20px;
@@ -208,4 +208,66 @@ body{
       .checkout-btn:hover {
         background-color: #e5e5e5;
         }
+        /* ----------------------------------- Daftar Pesawat ----------------------------------- */
+.flight-card {
+  background-color: #f3f0f0;
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.flight-card h3 {
+  font-size: 24px;
+  color: #2270B5;
+}
+
+.flight-card p {
+  font-size: 18px;
+}
+
+.flight-card button {
+  background-color: #2270B5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.flight-card button:hover {
+  background-color: #1a5e92;
+}
+
+/* ----------------------------------- General Adjustments ----------------------------------- */
+button {
+  font-size: 16px;
+}
+
+#daftarPesawat {
+  padding: 100px;
+
+}
+
+.back-btn {
+  background-color: #2270B5;
+  position: fixed;       /* Tombol tetap di layar saat scroll */
+  bottom: 20px;          /* Menempatkan tombol 20px dari bawah */
+  left: 50%;             /* Menempatkan tombol di tengah horizontal */
+  transform: translateX(-50%);  /* Memastikan tombol terpusat di tengah */
+  padding: 12px 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;            /* Mengatur lebar otomatis */
+  max-width: 300px;       /* Batas maksimal lebar tombol */
+  font-size: 16px;        /* Ukuran font tombol yang lebih kecil */
+}
+
+.back-btn:hover {
+  background-color: #1a5e92;
+}
 }
