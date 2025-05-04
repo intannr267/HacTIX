@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daftar Penerbangan</title>
-  <link rel="stylesheet" href="HacTixStyle.css"/>
+  <link rel="stylesheet" href="HacTixStyle.css" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
 
-  <h1>Daftar Penerbangan</h1>
-  <div id="infoPemesanan"></div>
+<body class="flex min-h-screen flex-col">
+  <!-- Header/Navigation -->
+  <header class="sticky top-0 z-10 border-b bg-white">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 font-bold pl-8">
+        <a href="index.html">
+          <span class="text-sky-600 text-3xl">Hack</span>
+          <span class="text-3xl">TIX</span>
+        </a>
+      </div>
+
+      <!-- Navigation Links (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#" class="text-sm font-medium">Flights</a>
+      </nav>
+
+      <!-- Auth Buttons -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="text-sm font-medium">Sign In</a>
+        <button
+          class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">Register</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Summary Bar -->
+  <div class="bg-sky-50 py-4 border-b">
+    <div class="container mx-auto px-4">
+      <!-- Breadcrumbs -->
+      <div class="flex items-center gap-2 text-sm">
+        <a href="mainIndex.html" class="text-sky-600 hover:underline">Home</a>
+        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+        <span>Flight Search Results</span>
+      </div>
+
+      <!-- Search Summary -->
+      <!-- Search Summary -->
+      <div class="mt-2 flex flex-wrap items-center gap-4 text-sm">
+        <div class="flex items-center gap-1">
+          <span class="font-medium">From:</span>
+          <span id="from"></span>
+        </div>
+        <i class="fas fa-arrow-right text-gray-400 text-xs"></i>
+        <div class="flex items-center gap-1">
+          <span class="font-medium">To:</span>
+          <span id="to"></span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="font-medium">Date:</span>
+          <span id="date"></span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="font-medium">Passengers:</span>
+          <span id="passengers"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="daftarPesawat"></div>
 
   <!-- Tombol kembali akan tetap di bawah layar -->
@@ -23,7 +81,7 @@
   <footer class="border-t">
     <div class="container mx-auto py-8 md:py-12 px-24">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-  
+
         <!-- Tautan Perusahaan -->
         <div>
           <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
@@ -33,7 +91,7 @@
             <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Media</a></li>
           </ul>
         </div>
-  
+
         <!-- Tautan Dukungan -->
         <div>
           <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
@@ -43,7 +101,7 @@
             <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">FAQs</a></li>
           </ul>
         </div>
-  
+
         <!-- Tautan Hukum -->
         <div>
           <h3 class="text-lg font-semibold mb-4">Legal</h3>
@@ -53,7 +111,7 @@
             <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Cookie</a></li>
           </ul>
         </div>
-  
+
         <!-- Newsletter -->
         <div>
           <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
@@ -64,7 +122,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Hak Cipta -->
       <div class="mt-8 pt-8 border-t text-center text-sm text-gray-500">
         © <span id="current-year"></span> HackTIX. Semua hak dilindungi.
@@ -79,16 +137,6 @@
     if (!data) {
       document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
     } else {
-      // Tampilkan ringkasan pemesanan
-      document.getElementById("infoPemesanan").innerHTML = `
-    <div class="info-box">
-      <p><strong>Dari:</strong> ${data.dari}</p>
-        <p><strong>Ke:</strong> ${data.ke}</p>
-        <p><strong>Tanggal:</strong> ${data.tanggal}</p>
-        <p><strong>Dewasa:</strong> ${data.jumlahDewasa}, <strong>Anak:</strong> ${data.jumlahAnak}</p>
-        <hr/>
-      `;
-
       // Contoh daftar pesawat
       const daftarPesawat = [
         {
@@ -113,7 +161,7 @@
           maskapai: "Air HACTIV",
           kode: "AH456",
           jam: "10:30 AM",
-          tiba : "12.45 PM",
+          tiba: "12.45 PM",
           asal: 'IND',
           durasi: '2h 15m',
           direct: true,
@@ -153,7 +201,7 @@
         card.innerHTML = `
             <div class="p-4 grid grid-cols-1 md:grid-cols-4 gap-4 ">
         <div class="flex items-center gap-3">
-          <img src="https://placehold.co/40x40/black/white?text=${pesawat.kode.slice(0,2)}" alt="${pesawat.maskapai}" class="h-10 w-10 rounded-full">
+          <img src="https://placehold.co/40x40/black/white?text=${pesawat.kode.slice(0, 2)}" alt="${pesawat.maskapai}" class="h-10 w-10 rounded-full">
           <div>
             <div class="font-medium">${pesawat.maskapai}</div>
             <div class="text-xs text-gray-500">Flight #${pesawat.kode}</div>
@@ -223,20 +271,27 @@
       });
     }
 
+    // Ubah nilai-nilai elemen sesuai data yang disimpan
+    document.getElementById("from").textContent = data.dari;
+    document.getElementById("to").textContent = data.ke;
+    document.getElementById("date").textContent = data.tanggal;
+    document.getElementById("passengers").textContent = `${data.jumlahDewasa} Dewasa, ${data.jumlahAnak} Anak`;
+
     // Fungsi untuk memilih pesawat
     function pilihPesawat(maskapai, kode, jam, harga) {
-      // Menyimpan data pesawat yang dipilih di sessionStorage
-      const pesawatDipilih = { maskapai, kode, jam, harga };
 
-      // Simpan pemesanan yang sudah ditambahkan pesawatnya
-      const pemesanan = JSON.parse(sessionStorage.getItem("pemesanan"));
-      pemesanan.pesawatDipilih = pesawatDipilih;
-      sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
-     
-      // Redirect ke form pemesanan
-      window.location.href = "form-pemesanan.html";
+    // Menyimpan data pesawat yang dipilih di sessionStorage
+    const pesawatDipilih = { maskapai, kode, jam, harga };
+
+    // Simpan pemesanan yang sudah ditambahkan pesawatnya
+    const pemesanan = JSON.parse(sessionStorage.getItem("pemesanan"));
+    pemesanan.pesawatDipilih = pesawatDipilih;
+    sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
+
+    // Redirect ke form pemesanan
+    window.location.href = "form-pemesanan.html";
     }
   </script>
-
 </body>
+
 </html>
