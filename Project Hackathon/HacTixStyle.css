@@ -272,6 +272,7 @@ button {
 .back-btn:hover {
   background-color: #1a5e92;
 }
+<<<<<<< HEAD
 
 /* Page 3 */
 .box-summary {
@@ -333,3 +334,5 @@ button {
   transition: 0.3s;
   display: block;
 }
+=======
+>>>>>>> 7ac492d0fa47dc1f960124756c0147e6fd0dba56
