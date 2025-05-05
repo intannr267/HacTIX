@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Pemesanan Penumpang</title>
+  <link rel="stylesheet" href="HacTixStyle.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header awal -->
+  <header class="sticky top-0 z-10 border-b bg-white">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 font-bold pl-8">
+        <a href="index.html">
+          <span class="text-sky-600 text-3xl">Hack</span>
+          <span class="text-3xl">TIX</span>
+        </a>
+      </div>
+
+      <!-- Navigation Links (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#" class="text-sm font-medium">Flights</a>
+      </nav>
+
+      <!-- Auth Buttons -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="text-sm font-medium">Sign In</a>
+        <button
+          class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">Register</button>
+      </div>
+    </div>
+  </header>
+  <!-- Header Akhir -->
+    <div class="penerbangan">
+        <!-- Search Summary Bar -->
+        <div class="bg-sky-50 py-4 border-b">
+            <div class="container mx-auto px-4">
+            <!-- Breadcrumbs -->
+                <div class="flex items-center gap-2 text-sm">
+                    <a href="index.html" class="text-sky-600 hover:underline">Home</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="IndexListPesawat.html" class="text-sky-600 hover:underline">Flight Search Results</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span>Summary</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-summary">
+        <div class="summary" id="summaryInfo"></div>
+
+        <form id="form-penumpang">
+            <div id="container-penumpang" class="passenger-form"></div>
+            <button class="btn-pemesanan" type="submit">Lanjutkan</button>
+        </form>
+
+     </div>
+    <!-- Footer -->
+  <footer class="border-t">
+    <div class="container mx-auto py-8 md:py-12 px-24">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+        <!-- Tautan Perusahaan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Tentang Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Karir</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Media</a></li>
+          </ul>
+        </div>
+
+        <!-- Tautan Dukungan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Pusat Bantuan</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Hubungi Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Tautan Hukum -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Legal</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Syarat</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Privasi</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Cookie</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
+          <p class="text-sm text-gray-500 mb-4">Dapatkan promo dan pembaruan</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Alamat email" class="w-full rounded-md border border-gray-300 py-2 px-3">
+            <button class="border border-gray-300 bg-white hover:bg-gray-50 px-4 py-2 rounded-md">Langganan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hak Cipta -->
+      <div class="mt-8 pt-8 border-t text-center text-sm text-gray-500">
+        © <span id="current-year"></span> HackTIX. Semua hak dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+        const data = JSON.parse(sessionStorage.getItem("pemesanan"));
+        const container = document.getElementById("container-penumpang");
+        const summaryInfo = document.getElementById("summaryInfo");
+
+    if (!data) {
+        document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
+        } else {
+        // Tampilkan ringkasan pesawat & pemesanan
+        const pesawat = data.pesawatDipilih;
+        summaryInfo.innerHTML = `
+            <h2 class="ringkasan">Ringkasan Penerbangan</h2>
+            <p><strong>Dari:</strong> ${data.dari}</p>
+            <p><strong>Ke:</strong> ${data.ke}</p>
+            <p><strong>Tanggal:</strong> ${data.tanggal}</p>
+            ${data.tanggalKembali ? `<p><strong>Tanggal Kembali:</strong> ${data.tanggalKembali}</p>` : ""}
+            <p><strong>Pesawat:</strong> ${pesawat.maskapai} (${pesawat.kode})</p>
+            <p><strong>Jam Keberangkatan:</strong> ${pesawat.jam}</p>
+            <p><strong>Harga per Penumpang:</strong> Rp ${pesawat.harga.toLocaleString("id-ID")}</p>
+            <p><strong>Penumpang:</strong> ${data.jumlahDewasa} Dewasa, ${data.jumlahAnak} Anak</p>
+        `;
+
+        let index = 1;
+
+        // Dewasa
+        for (let i = 0; i < data.jumlahDewasa; i++) {
+            const div = document.createElement("div");
+            div.className = "form-group";
+            div.innerHTML = `
+            <h3 class="input-id">Penumpang Dewasa ${index}</h3>
+            <div class="input-id">
+              <div class="fieldinput">
+                <label class="input-idfield">Nama Lengkap</label>
+                <input class="input-idinput" type="text" name="nama_d_${i}" required />
+              </div>
+              <div class="fieldinput">
+                <label class="input-idfield">NIK</label>
+                <input class="input-idinput" type="text" name="nik_d_${i}" required pattern="\\d{16}" placeholder="16 digit NIK" />
+              </div>
+            </div>
+            `;
+        container.appendChild(div);
+        index++;
+        } 
+
+        // Anak
+        for (let i = 0; i < data.jumlahAnak; i++) {
+            const div = document.createElement("div");
+            div.className = "form-group";
+            div.innerHTML = `
+            <h3 class="input-id">Penumpang Anak ${index}</h3>
+            <label class="input-idfield">Nama Lengkap</label>
+            <input class="input-idinput" type="text" name="nama_a_${i}" required />
+            `;
+            container.appendChild(div);
+            index++;
+        }
+    }
+
+    // Submit form
+    document.getElementById("form-penumpang").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const entries = Array.from(formData.entries());
+      console.log("Data penumpang:", entries);
+
+      sessionStorage.setItem("dataPenumpang", JSON.stringify(entries));
+
+      alert("Data penumpang berhasil disimpan.");
+    });
+  </script>
+
+</body>
+</html>

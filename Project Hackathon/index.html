@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HacTIX</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+</head>
+<body>
+    <!-- Header awal -->
+    <header class="header">
+        <a href="#home" class="header-title">Hack<span>TIX</span></a>
+        
+        <div class="navbar">
+            <a href="#pemesanan-tiket">Pesan</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="#" class="text-sm font-medium">Sign In</a>
+            <button
+              class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">Register</button>
+        </div>
+    </header>
+    <!-- Header Akhir -->
+    <Div class="scroll-container">
+    <!-- Banner -->
+     <section class="banner screen" id="#home">
+        <main class="content">
+            <h1>Liburan Cuy........</h1>
+            <p>Berliburlah sebelum kesibukan menghantuimu</p>
+        </main>
+     </section>
+    <!-- Banner -->
+    
+    <!-- preview vidio liburan -->
+    <section class="preview screen">
+        <H1 class="title-preview">Destinations</H1>
+        <div class="p-vidio">
+            <video src="Asset/Vidio/video pemandangan pantai lombok , indonesia - no copyright.mp4" muted loop autoplay></video> 
+            <video src="Asset\Vidio\Video Pemandangan Laut No Copyright.mp4" muted loop autoplay></video>
+            <video src="Asset\Vidio\Video Background Sunset (No Copyright) 30 Detik_2.mp4" muted loop autoplay></video>
+        </div>
+    </section>
+    <!-- preview vidio liburan -->
+
+    <!-- pemesanan Tiket -->
+    <section class="pemesanan screen" id="pemesanan-tiket">
+        <main>
+        <div class="box-pemesanan">
+            <h1>Pemesanan Tiket</h1>
+
+            <!-- lokasi -->
+            <div class="dv-pemesanan">
+                <div class="ig-lokasi">
+                    <div class="field">
+                      <label>Dari</label>
+                      <select id="dari">
+                        <option value="">Pilih Kota</option>
+                        <option value="Manggarai">Manggarai</option>
+                        <option value="Kota Tua">Kota Tua</option>
+                        <option value="Tanah Abang">Tanah Abang</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label>Ke</label>
+                      <select id="ke">
+                        <option value="">Pilih Kota</option>
+                        <option value="Manggarai">Manggarai</option>
+                        <option value="Kota Tua">Kota Tua</option>
+                        <option value="Rawa Buntu">Rawa Buntu</option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+            <!-- lokasi -->
+
+            <!-- Tanggal Keberangkatan -->
+            <div>
+            <!-- Tanggal dan Toggle Pulang Pergi -->
+                <div class="ig-tanggal">
+                    <div class="field">
+                        <label>Tanggal Keberangkatan</label>
+                        <input type="date" id="tanggalPergi" />
+                    </div>
+                    <!-- Tanggal Balik -->
+                    <div class="ig-tanggal" id="field-tanggal-balik">
+                        <div class="field">
+                            <label>Tanggal Balik</label>
+                            <input type="date" id="tanggalBalik" disabled />
+                        </div>
+                    </div>
+                    <div class="field-toggle">
+                        <label>Pulang Pergi</label>
+                        <label class="switch">
+                        <input type="checkbox" id="togglePulangPergi" />
+                        <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- Tanggal Keberangkatan -->
+
+            <!-- Penumpang -->
+             <div>
+                <div class="passengers">
+                    <label>Jumlah Penumpang</label>
+                </div>
+                  <div class="passengers-in">
+                    <span class="passengers-cap" id="p-Dewasa">Dewasa:</span>
+                    <span class="passengers-cap" id="p-Anak">Anak: </span>
+                  </div>
+                  <div class="input-passengers">
+                    <div class="number-passengers">
+                        <label>Dewasa</label>
+                        <button class="calculation2" id="btnPenguranganD">-</button>
+                        <span class="counting" id="jumlahDewasa">0</span>
+                        <button class="calculation3" id="btnPenambahanD">+</button>
+                      </div>
+                    <div class="number-passengers">
+                      <label>Anak</label>
+                      <button class="calculation1" id="btnPenguranganA">-</button>
+                      <span class="counting" id="jumlahAnak">0</span>
+                      <button class="calculation3" id="btnPenambahanA">+</button>
+                    </div>
+                  </div>
+             </div>
+            <!-- Penumpang -->
+
+            <!-- next button -->
+            <button class="pesan-tiket-btn" id="btnPesan">Pesan</button>
+            <!-- next button -->
+
+        </div>
+        </main>
+    </section>
+    <!-- pemesanan Tiket -->
+    </Div>
+    <script>
+        // Penumpang
+        let jumlahAnak = 0;
+        let jumlahDewasa = 0;
+        const spanAnak = document.getElementById("jumlahAnak");
+        const spanDewasa = document.getElementById("jumlahDewasa");
+        const pAnak = document.getElementById("p-Anak");
+        const pDewasa = document.getElementById("p-Dewasa");
+    
+        function updatePenumpang() {
+          spanAnak.innerText = jumlahAnak;
+          spanDewasa.innerText = jumlahDewasa;
+          pAnak.innerText = "Anak: " + jumlahAnak;
+          pDewasa.innerText = "Dewasa: " + jumlahDewasa;
+        }
+    
+        document.getElementById("btnPenambahanA").onclick = () => { jumlahAnak++; updatePenumpang(); };
+        document.getElementById("btnPenguranganA").onclick = () => { if (jumlahAnak > 0) jumlahAnak--; updatePenumpang(); };
+        document.getElementById("btnPenambahanD").onclick = () => { jumlahDewasa++; updatePenumpang(); };
+        document.getElementById("btnPenguranganD").onclick = () => { if (jumlahDewasa > 0) jumlahDewasa--; updatePenumpang(); };
+    
+        // Toggle pulang-pergi
+        const togglePP = document.getElementById("togglePulangPergi");
+        const tanggalPergi = document.getElementById("tanggalPergi");
+        const tanggalBalik = document.getElementById("tanggalBalik");
+        const fieldTanggalBalik = document.getElementById("field-tanggal-balik");
+    
+        togglePP.addEventListener("change", function () {
+          if (this.checked) {
+            fieldTanggalBalik.style.display = "block";
+            tanggalBalik.disabled = false;
+          } else {
+            fieldTanggalBalik.style.display = "none";
+            tanggalBalik.disabled = true;
+            tanggalBalik.value = "";
+          }
+        });
+    
+        // Validasi tanggal balik
+        tanggalPergi.addEventListener("change", function () {
+          if (!tanggalPergi.value) return;
+          const minTanggal = new Date(tanggalPergi.value);
+          minTanggal.setDate(minTanggal.getDate() + 1);
+          const minDateString = minTanggal.toISOString().split("T")[0];
+          tanggalBalik.min = minDateString;
+    
+          if (new Date(tanggalBalik.value) < new Date(minDateString)) {
+            tanggalBalik.value = "";
+          }
+        });
+    
+        // Simpan & pindah
+        document.getElementById("btnPesan").addEventListener("click", () => {
+          const dari = document.getElementById("dari").value;
+          const ke = document.getElementById("ke").value;
+          const tanggal = tanggalPergi.value;
+          const tanggalKembali = togglePP.checked ? tanggalBalik.value : null;
+    
+          if (!dari || !ke || !tanggal || (togglePP.checked && !tanggalKembali)) {
+            alert("Mohon lengkapi semua data!");
+            return;
+          }
+    
+          const pemesanan = {
+            dari, ke, tanggal,
+            tanggalKembali,
+            jumlahAnak, jumlahDewasa,
+            perjalanan: togglePP.checked ? "pp" : "sekali"
+          };
+    
+          sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
+          window.location.href = "IndexListPesawat.html";
+        });
+      </script>
+</body>
+</html>

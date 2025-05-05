@@ -75,5 +75,5 @@ document.getElementById('btnPesan').addEventListener('click', function () {
     sessionStorage.setItem('pemesanan', JSON.stringify(pemesananData));
 
     // Arahkan ke halaman list pesawat
-    window.location.href = "list-pesawat.html";
+    window.location.href = "IndexListPesawat.html";
 });
