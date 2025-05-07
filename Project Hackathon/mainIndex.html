@@ -1,148 +1,143 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HacTIX</title>
-  <link rel="stylesheet" href="HacTixStyle.css"/>
-  <style>
-    /* Toggle switch */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px; width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: #2e86de;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-
-    #field-tanggal-balik {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header id="box-header">
-    <h1 class="teks-header">HacTIX</h1>
+  <!-- Header awal -->
+  <header class="header">
+    <a href="#home" class="header-title">Hack<span>TIX</span></a>
+    
+    <div class="navbar">
+        <a href="#pemesanan-tiket">Pesan</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="#" class="text-sm font-medium text-black">Sign In</a>
+        <button
+          class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">Register</button>
+    </div>
   </header>
+  <!-- Header Akhir -->
+  <Div>
+  <!-- Banner -->
+  <section class="banner screen" id="#home">
+    <main class="content">
+        <h1>Liburan Cuy........</h1>
+        <p>Berliburlah sebelum kesibukan menghantuimu</p>
+    </main>
+ </section>
+  <!-- Banner -->
 
-  <div class="scroll-container container">
-    <section class="screen">
-      <div>
-        <video class="background-vidio" src="Asset/Vidio/video pemandangan pantai lombok , indonesia - no copyright.mp4" muted autoplay loop></video>
-      </div>
-    </section>
+  <!-- preview vidio liburan -->
+  <section class="preview screen">
+    <H1 class="title-preview">Destinations</H1>
+    <div class="p-vidio">
+        <video src="Asset/Vidio/video pemandangan pantai lombok , indonesia - no copyright.mp4" muted loop autoplay></video> 
+        <video src="Asset\Vidio\Video Pemandangan Laut No Copyright.mp4" muted loop autoplay></video>
+        <video src="Asset\Vidio\Video Background Sunset (No Copyright) 30 Detik_2.mp4" muted loop autoplay></video>
+    </div>
+  </section>
+  <!-- preview vidio liburan -->
 
-    <section class="screen">
-      <div class="box-pemesanan">
-        <h2 class="teks-pemesanan">Pemesanan Tiket</h2>
+  <!-- pemesanan Tiket -->
+  <section class="pemesanan screen" id="pemesanan-tiket">
+    <main>
+    <div class="box-pemesanan">
+        <h1>Pemesanan Tiket</h1>
 
-        <!-- Lokasi -->
-        <div class="input-group">
-          <div class="field">
-            <label>Dari</label>
-            <select id="dari">
-              <option value="">Pilih Kota</option>
-              <option value="Manggarai">Manggarai</option>
-              <option value="Kota Tua">Kota Tua</option>
-              <option value="Tanah Abang">Tanah Abang</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Ke</label>
-            <select id="ke">
-              <option value="">Pilih Kota</option>
-              <option value="Manggarai">Manggarai</option>
-              <option value="Kota Tua">Kota Tua</option>
-              <option value="Rawa Buntu">Rawa Buntu</option>
-            </select>
-          </div>
+        <!-- lokasi -->
+        <div class="dv-pemesanan">
+            <div class="ig-lokasi">
+                <div class="field">
+                  <label>Dari</label>
+                  <select id="dari">
+                    <option value="">Pilih Kota</option>
+                    <option value="Manggarai">Manggarai</option>
+                    <option value="Kota Tua">Kota Tua</option>
+                    <option value="Tanah Abang">Tanah Abang</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Ke</label>
+                  <select id="ke">
+                    <option value="">Pilih Kota</option>
+                    <option value="Manggarai">Manggarai</option>
+                    <option value="Kota Tua">Kota Tua</option>
+                    <option value="Rawa Buntu">Rawa Buntu</option>
+                  </select>
+                </div>
+            </div>
         </div>
+        <!-- lokasi -->
 
+        <!-- Tanggal Keberangkatan -->
+        <div>
         <!-- Tanggal dan Toggle Pulang Pergi -->
-        <div class="input-group">
-          <div class="field">
-            <label>Tanggal Keberangkatan</label>
-            <input type="date" id="tanggalPergi" />
-          </div>
-          <div class="field">
-            <label>Pulang Pergi</label>
-            <label class="switch">
-              <input type="checkbox" id="togglePulangPergi" />
-              <span class="slider"></span>
-            </label>
-          </div>
+            <div class="ig-tanggal">
+                <div class="field">
+                    <label>Tanggal Keberangkatan</label>
+                    <input type="date" id="tanggalPergi" />
+                </div>
+                <!-- Tanggal Balik -->
+                <div class="ig-tanggal" id="field-tanggal-balik">
+                    <div class="field">
+                        <label>Tanggal Balik</label>
+                        <input type="date" id="tanggalBalik" disabled />
+                    </div>
+                </div>
+                <div class="field-toggle">
+                    <label>Pulang Pergi</label>
+                    <label class="switch">
+                    <input type="checkbox" id="togglePulangPergi" />
+                    <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
         </div>
-
-        <!-- Tanggal Balik -->
-        <div class="input-group" id="field-tanggal-balik">
-          <div class="field">
-            <label>Tanggal Balik</label>
-            <input type="date" id="tanggalBalik" disabled />
-          </div>
-        </div>
+        <!-- Tanggal Keberangkatan -->
 
         <!-- Penumpang -->
-        <div class="passengers">
-          <label>Jumlah Penumpang</label>
-        </div>
-        <div class="passengers-in">
-          <span class="passengers-cap" id="p-Dewasa">Dewasa:</span>
-          <span class="passengers-cap" id="p-Anak">Anak: </span>
-        </div>
-        <div class="input-passengers">
-          <div class="number-passengers">
-            <label>Anak</label>
-            <button class="calculation1" id="btnPenguranganA">-</button>
-            <span class="counting" id="jumlahAnak">0</span>
-            <button id="btnPenambahanA">+</button>
-          </div>
-          <div class="number-passengers">
-            <label>Dewasa</label>
-            <button class="calculation2" id="btnPenguranganD">-</button>
-            <span class="counting" id="jumlahDewasa">0</span>
-            <button id="btnPenambahanD">+</button>
-          </div>
-        </div>
+         <div>
+            <div class="passengers">
+                <label>Jumlah Penumpang</label>
+            </div>
+              <div class="passengers-in">
+                <span class="passengers-cap" id="p-Dewasa">Dewasa:</span>
+                <span class="passengers-cap" id="p-Anak">Anak: </span>
+              </div>
+              <div class="input-passengers">
+                <div class="number-passengers">
+                    <label>Dewasa</label>
+                    <button class="calculation2" id="btnPenguranganD">-</button>
+                    <span class="counting" id="jumlahDewasa">0</span>
+                    <button class="calculation3" id="btnPenambahanD">+</button>
+                  </div>
+                <div class="number-passengers">
+                  <label>Anak</label>
+                  <button class="calculation1" id="btnPenguranganA">-</button>
+                  <span class="counting" id="jumlahAnak">0</span>
+                  <button class="calculation3" id="btnPenambahanA">+</button>
+                </div>
+              </div>
+         </div>
+        <!-- Penumpang -->
 
-        <!-- Tombol Pesan -->
-        <button class="checkout-btn" id="btnPesan">Pesan</button>
-      </div>
+        <!-- next button -->
+        <button class="pesan-tiket-btn" id="btnPesan">Pesan</button>
+        <!-- next button -->
+
+        </div>
+      </main>
     </section>
-  </div>
-
+    <!-- pemesanan Tiket -->
+  </Div>
   <script>
     // Penumpang
     let jumlahAnak = 0;
@@ -179,7 +174,7 @@
         tanggalBalik.disabled = true;
         tanggalBalik.value = "";
       }
-    });
+   });
 
     // Validasi tanggal balik
     tanggalPergi.addEventListener("change", function () {
