@@ -131,8 +131,8 @@
   </footer>
 
   <script>
-    // Ambil data pemesanan dari sessionStorage
-    const data = JSON.parse(sessionStorage.getItem("pemesanan"));
+    // Ambil data pemesanan dari localStorage
+    const data = JSON.parse(localStorage.getItem("pemesanan"));
 
     if (!data) {
       document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
@@ -280,13 +280,13 @@
     // Fungsi untuk memilih pesawat
     function pilihPesawat(maskapai, kode, jam, harga) {
 
-    // Menyimpan data pesawat yang dipilih di sessionStorage
+    // Menyimpan data pesawat yang dipilih di localStorage
     const pesawatDipilih = { maskapai, kode, jam, harga };
 
     // Simpan pemesanan yang sudah ditambahkan pesawatnya
-    const pemesanan = JSON.parse(sessionStorage.getItem("pemesanan"));
+    const pemesanan = JSON.parse(localStorage.getItem("pemesanan"));
     pemesanan.pesawatDipilih = pesawatDipilih;
-    sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
+    localStorage.setItem("pemesanan", JSON.stringify(pemesanan));
 
     // Redirect ke form pemesanan
     window.location.href = "form-pemesanan.html";
