@@ -13,16 +13,19 @@
 <body>
   <!-- Header awal -->
   <header class="header">
-    <a href="#home" class="header-title">Hack<span>TIX</span></a>
-    
+    <div class="logo">
+      <a href="#home" class="header-title">Hack<span>TIX</span></a>
+    </div>
+      
     <div class="navbar">
         <a href="#pemesanan-tiket">Pesan</a>
     </div>
 
+    <!-- Auth Buttons -->
     <div id="authSection" class="flex items-center">
       <!-- When logged out -->
       <div id="loggedOutView" class="flex space-x-2">
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 pe-24">
           <a href="#" class="text-sm font-medium text-black" id="signInBtn">Sign In</a>
           <button class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
             <a href="register.html">Register</a>
@@ -42,50 +45,50 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
       <!-- Popup -->
       <div id="popup" class="bg-white rounded-xl p-12 w-full max-w-md mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
-          <!-- Close button -->
-          <button id="closeBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
-              &times;
+        <!-- Close button -->
+        <button id="closeBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
+            &times;
+        </button>
+        
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
+
+        <form id="popupLoginForm">
+          <div class="mb-4">
+              <label for="popupUsername" class="block text-gray-700 text-sm font-medium mb-2">Email or Username</label>
+              <input type="text" id="popupUsername" placeholder="Enter your email or username" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+          </div>
+          
+          <div class="mb-4">
+              <label for="popupPassword" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+              <input type="password" id="popupPassword" placeholder="Enter your password" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+          </div>
+          
+          <div class="mb-4 flex items-center">
+            <input type="checkbox" id="popupRemember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="popupRemember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+          </div>
+          
+          <!-- Error message -->
+          <div id="popupLoginError" class="hidden p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm"></div>
+          
+          <button type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              Sign In
           </button>
           
-          <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
-
-          <form id="popupLoginForm">
-              <div class="mb-4">
-                  <label for="popupUsername" class="block text-gray-700 text-sm font-medium mb-2">Email or Username</label>
-                  <input type="text" id="popupUsername" placeholder="Enter your email or username" 
-                      class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
-              </div>
-              
-              <div class="mb-4">
-                  <label for="popupPassword" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
-                  <input type="password" id="popupPassword" placeholder="Enter your password" 
-                      class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
-              </div>
-              
-              <div class="mb-4 flex items-center">
-                <input type="checkbox" id="popupRemember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                <label for="popupRemember" class="ml-2 block text-sm text-gray-700">Remember me</label>
-              </div>
-              
-              <!-- Error message -->
-              <div id="popupLoginError" class="hidden p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm"></div>
-              
-              <button type="submit" 
-                  class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                  Sign In
-              </button>
-              
-              <a href="#" class="block text-center text-blue-600 hover:underline text-sm mt-4">
-                  Forgot password?
-              </a>
-              
-              <div class="mt-4 text-center">
-                <p class="text-sm text-gray-600">
-                  Don't have an account? 
-                  <a href="register.html" class="font-semibold text-blue-600 hover:text-blue-500">Register Now</a>
-                </p>
-              </div>
-          </form>
+          <a href="#" class="block text-center text-blue-600 hover:underline text-sm mt-4">
+              Forgot password?
+          </a>
+          
+          <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600">
+              Don't have an account? 
+              <a href="register.html" class="font-semibold text-blue-600 hover:text-blue-500">Register Now</a>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
 
