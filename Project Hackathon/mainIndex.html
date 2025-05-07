@@ -245,7 +245,7 @@
         perjalanan: togglePP.checked ? "pp" : "sekali"
       };
 
-      sessionStorage.setItem("pemesanan", JSON.stringify(pemesanan));
+      localStorage.setItem("pemesanan", JSON.stringify(pemesanan));
       window.location.href = "list-pesawat.html";
     });
 

@@ -112,7 +112,7 @@
 </footer>
 
 <script>
-      const data = JSON.parse(sessionStorage.getItem("pemesanan"));
+      const data = JSON.parse(localStorage.getItem("pemesanan"));
       const container = document.getElementById("container-penumpang");
       const summaryInfo = document.getElementById("summaryInfo");
 
@@ -176,7 +176,7 @@
     const entries = Array.from(formData.entries());
     console.log("Data penumpang:", entries);
 
-    sessionStorage.setItem("dataPenumpang", JSON.stringify(entries));
+    localStorage.setItem("dataPenumpang", JSON.stringify(entries));
 
     alert("Data penumpang berhasil disimpan.");
   });
