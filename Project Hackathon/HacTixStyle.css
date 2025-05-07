@@ -272,3 +272,65 @@ button {
 .back-btn:hover {
   background-color: #1a5e92;
 }
+
+/* Page 3 */
+.box-summary {
+  width: 480px;
+  min-height: 100vh;
+  padding: 3rem;
+  padding-bottom: 2rem;
+  font-size: 16px;
+  background-color: #ffffff;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.605);
+  margin-left: 10px;
+  margin-bottom: 20px;
+  }
+.box-summary h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+}
+.ringkasan{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  padding-bottom: 10px;
+}
+.input-id {
+  display: flex;
+  padding-top: 1rem;
+  font-weight: 900;
+}
+.input-idfield {
+  flex: 1;
+  display: flex;
+  font-size: 14;
+  flex-direction: column;
+  font-weight: 700;
+}
+.fieldinput{
+  padding-right: 10px;
+}
+.input-idinput {
+  font-family: 'inter','Arial', sans-serif;
+  font-size: 12px;
+  color : black;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.605);
+  padding: 5px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 300;
+}
+.btn-pemesanan{
+  background: #2270B5;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 36px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+}
