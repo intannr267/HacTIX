@@ -19,12 +19,12 @@ body {
     /* min-height: 2000px; */
 }
 
-.scroll-container {
+/* .scroll-container {
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    }
+    } */
 .screen {
     scroll-snap-align: start;
     height: 100vh;
@@ -37,9 +37,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.4rem 7%;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.3);
     border-bottom: 1px solid rgb(152, 152, 152);
-    background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg);
+    /* background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg); */
     border-radius: 0px 0px 16px 16px ;
     position: fixed;
     top: 0;
@@ -52,11 +52,11 @@ body {
     color: rgb(86, 179, 255);
 }
 .header-title span {
-    color: #e3e3e3;
+    color: #000000;
     font-size: 30px;
 }
 .navbar a{
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 14px;
     display: inline-block;
     margin-left: 550px;
@@ -64,6 +64,10 @@ body {
 .navbar a:hover {
     color: #989898;
 }
+.fontArial {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /* Page 1 */
 /* Banner */
 .banner {
