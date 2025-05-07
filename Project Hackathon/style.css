@@ -37,7 +37,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.4rem 7%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
     border-bottom: 1px solid rgb(152, 152, 152);
     /* background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg); */
     border-radius: 0px 0px 16px 16px ;
@@ -49,7 +49,7 @@ body {
 }
 .header-title {
     font-size: 32px;
-    color: rgb(86, 179, 255);
+    color: white;
 }
 .header-title span {
     color: #000000;
