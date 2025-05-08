@@ -121,22 +121,22 @@ body {
   padding-top: 3rem;
 }
 .p-vidio video{
-    width: 360px;
-    height: 240px;
-    /* align-items: center; */
+  max-width: 360px;
+  max-height: 240px;
+  align-items: center;
 }
 
 /* Pemesanan Tiket */
 
 .pemesanan{
-    padding: 7rem 17.6% 10rem;
+    padding: 7rem 15% 10rem;
     max-width: 60rem;
 }
 .box-pemesanan {
-    width: 900px;
-    height: 580px;
+    min-width: 70vw;
+    min-height: 550px;
     padding: 50px;
-    font-size: 18px;
+    font-size: 28px;
     background-color: rgb(34, 112, 181,75%);
     background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg);
     border-radius: 20px;
@@ -164,7 +164,7 @@ body {
       }
     .ig-lokasi select {
         font-family: 'inter','Arial', sans-serif;
-        font-size: 16px;
+        font-size: 12px;
         color : black;
         font-weight: bold;
         padding: 8px;
@@ -177,7 +177,7 @@ body {
     .ig-tanggal {
         display: flex;
         gap: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
     .ig-tanggal .field{
         flex: 1;
@@ -197,7 +197,7 @@ body {
       }
     .ig-tanggal input {
         font-family: 'inter','Arial', sans-serif;
-        font-size: 16px;
+        font-size: 12px;
         color : black;
         font-weight: bold;
         padding: 8px;
@@ -252,14 +252,14 @@ body {
       }
     .passengers-in {
         font-family: 'inter','Arial', sans-serif;
-        font-size: 16px;
+        font-size: 12px;
         color : black;
         font-weight: bold;
         background: #ffffff;
         border-radius: 8px 8px 0 0;
         border: none;
         border: 1px solid #ccc;
-        width: 300px;
+        max-width: 300px;
         height: 30px;
       }
     .input-passengers {
@@ -267,11 +267,11 @@ body {
         border-radius: 0 0 8px 8px;
         border: none;
         border: 1px solid #ccc;
-        width: 300px;
+        max-width: 300px;
       }
     .number-passengers {
         font-family: 'inter','Arial', sans-serif;
-        font-size: 16px;
+        font-size: 12px;
         color : black;
         font-weight: bold;
         padding: 8px;
@@ -288,20 +288,21 @@ body {
       }
     .number-passengers label{
         color: black;
-        margin-left: 50px;
+        margin-top: 10px;
+        margin-left: 30px;
       }
     .calculation1 {
-        width: 24px;
+        min-width: 24px;
         left: 24px;
-        margin-left: 50px;
+        margin-left: 45.5px;
       }
     .calculation2 {
-        width: 24px;
+        min-width: 24px;
         left: 24px;
         margin-left: 30px;
       }
     .calculation3 {
-        width: 24px;
+        min-width: 24px;
         left: 24px;
     }
 
@@ -315,20 +316,21 @@ body {
         font-size: 16px;
       }
     .counting {
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
       }
     
     /* button checkout */
     .pesan-tiket-btn {
         background: var(--defult);
         color: rgb(255, 255, 255);
+        font-size: 16px;
         font-weight: 200;
         padding: 10px 20px;
         border: none;
         border-radius: 10px;
-        width: 20%;
-        margin-top: 45px;
+        min-width: 20%;
+        margin-top: 35px;
         margin-left: 40%;
         cursor: pointer;
         transition: 0.3s;
