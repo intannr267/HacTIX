@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HacTIX</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header awal -->
+  <header class="header">
+    <a href="#home" class="header-title">Hack<span>TIX</span></a>
+    
+    <div class="navbar">
+        <a href="#pemesanan-tiket">Pesan</a>
+    </div>
+
+     <!-- Auth Buttons -->
+    <div id="authSection" class="flex items-center">
+      <!-- When logged out -->
+      <div id="loggedOutView" class="flex space-x-2">
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-sm font-medium text-black" id="signInBtn">Sign In</a>
+          <button class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            <a href="register.html">Register</a>
+          </button>
+        </div>
+      </div>
+      <!-- Ketika log in -->
+      <div id="loggedInView" class="hidden flex items-center space-x-4">
+        <span class="text-gray-700">Welcome, <span id="usernameDisplay" class="font-medium"></span></span>
+        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <!--Overlay-->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+      <!-- Popup -->
+      <div id="popup" class="bg-white rounded-xl p-12 w-full max-w-md mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
+        <!-- Close button -->
+        <button id="closeBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
+            &times;
+        </button>
+        
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
+
+        <form id="popupLoginForm">
+          <div class="mb-4">
+              <label for="popupUsername" class="block text-gray-700 text-sm font-medium mb-2">Email or Username</label>
+              <input type="text" id="popupUsername" placeholder="Enter your email or username" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-blue-500  text-black">
+          </div>
+          
+          <div class="mb-4">
+              <label for="popupPassword" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+              <input type="password" id="popupPassword" placeholder="Enter your password" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+          </div>
+          
+          <div class="mb-4 flex items-center">
+            <input type="checkbox" id="popupRemember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="popupRemember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+          </div>
+          
+          <!-- Error message -->
+          <div id="popupLoginError" class="hidden p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm"></div>
+          
+          <button type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              Sign In
+          </button>
+
+          <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600">
+              Don't have an account? 
+              <a href="register.html" class="font-semibold text-blue-600 hover:text-blue-500">Register Now</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </header>
+  <!-- Header Akhir -->
+  <div>
+  <!-- Banner -->
+  <section class="banner screen" id="home">
+    <main class="content">
+        <h1>Liburan Cuy........</h1>
+        <p>Berliburlah sebelum kesibukan menghantuimu</p>
+    </main>
+ </section>
+  <!-- Banner -->
+
+  <!-- preview vidio liburan -->
+  <section class="preview screen">
+    <h1 class="title-preview">Destinations</h1>
+    <div class="p-vidio">
+        <video src="Asset/Vidio/video pemandangan pantai lombok , indonesia - no copyright.mp4" muted loop autoplay></video> 
+        <video src="Asset/Vidio/Video Pemandangan Laut No Copyright.mp4" muted loop autoplay></video>
+        <video src="Asset/Vidio/Video Background Sunset (No Copyright) 30 Detik_2.mp4" muted loop autoplay></video>
+    </div>
+  </section>
+  <!-- preview vidio liburan -->
+
+  <!-- pemesanan Tiket -->
+  <section class="pemesanan screen" id="pemesanan-tiket">
+    <main>
+    <div class="box-pemesanan">
+      <h1>Pemesanan Tiket</h1>
+
+      <!-- lokasi -->
+      <div class="dv-pemesanan">
+        <div class="ig-lokasi">
+          <div class="field">
+            <label>Dari</label>
+            <select id="dari">
+              <option value="">Pilih Kota</option>
+              <option value="Manggarai">Manggarai</option>
+              <option value="Kota Tua">Kota Tua</option>
+              <option value="Tanah Abang">Tanah Abang</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Ke</label>
+            <select id="ke">
+              <option value="">Pilih Kota</option>
+              <option value="Manggarai">Manggarai</option>
+              <option value="Kota Tua">Kota Tua</option>
+              <option value="Rawa Buntu">Rawa Buntu</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- lokasi -->
+
+      <!-- Tanggal Keberangkatan -->
+      <div>
+      <!-- Tanggal dan Toggle Pulang Pergi -->
+        <div class="ig-tanggal">
+            <div class="field">
+                <label>Tanggal Keberangkatan</label>
+                <input type="date" id="tanggalPergi" />
+            </div>
+            <!-- Tanggal Balik -->
+            <div class="ig-tanggal" id="field-tanggal-balik">
+              <div class="field">
+                <label>Tanggal Balik</label>
+                <input type="date" id="tanggalBalik" disabled />
+              </div>
+            </div>
+            <div class="field-toggle">
+              <label>Pulang Pergi</label>
+              <label class="switch">
+              <input type="checkbox" id="togglePulangPergi" />
+              <span class="slider"></span>
+              </label>
+            </div>
+        </div>
+      </div>
+      <!-- Tanggal Keberangkatan -->
+
+      <!-- Penumpang -->
+      <div>
+        <div class="passengers">
+            <label>Jumlah Penumpang</label>
+        </div>
+          <div class="passengers-in">
+            <span class="passengers-cap" id="p-Dewasa">Dewasa:</span>
+            <span class="passengers-cap" id="p-Anak">Anak: </span>
+          </div>
+          <div class="input-passengers">
+            <div class="number-passengers">
+              <label>Dewasa</label>
+              <button class="calculation2" id="btnPenguranganD">-</button>
+              <span class="counting" id="jumlahDewasa">0</span>
+              <button class="calculation3" id="btnPenambahanD">+</button>
+            </div>
+            <div class="number-passengers">
+              <label>Anak</label>
+              <button class="calculation1" id="btnPenguranganA">-</button>
+              <span class="counting" id="jumlahAnak">0</span>
+              <button class="calculation3" id="btnPenambahanA">+</button>
+            </div>
+          </div>
+      </div>
+      <!-- Penumpang -->
+
+      <!-- next button -->
+      <button class="pesan-tiket-btn" id="btnPesan">Pesan</button>
+      <!-- next button -->
+
+      </div>
+    </main>
+  </section>
+    <!-- pemesanan Tiket -->
+  </div>
+  <script src="Data JavaScript/form-main.js"></script>
+  <script src="Data JavaScript/data.js"></script>
+</body>
+</html>

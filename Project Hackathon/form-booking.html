@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daftar Penerbangan</title>
-  <link rel="stylesheet" href="HacTixStyle.css" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackTIX - Lengkapi Pemesanan Anda</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="HacTixStyle.css">
+  
 </head>
-
 <body class="flex min-h-screen flex-col">
   <!-- Header/Navigation -->
   <header class="sticky top-0 z-10 border-b bg-white">
@@ -23,12 +25,12 @@
           <span class="text-3xl">TIX</span>
         </a>
       </div>
-
+      
       <!-- Navigation Links (hidden on mobile) -->
       <nav class="hidden md:flex items-center gap-6">
         <a href="#" class="text-sm font-medium">Flights</a>
       </nav>
-
+      
       <!-- Auth Buttons -->
       <div id="authSection" class="flex items-center">
         <!-- When logged out -->
@@ -98,50 +100,161 @@
     </div>
   </header>
 
-  <!-- Search Summary Bar -->
+  <!-- Breadcrumbs -->
   <div class="bg-sky-50 py-4 border-b">
     <div class="container mx-auto px-28">
-      <!-- Breadcrumbs -->
       <div class="flex items-center gap-2 text-sm">
         <a href="form-main.html" class="text-sky-600 hover:underline">Home</a>
         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-        <span>Flight Search</span>
-      </div>
-
-      <!-- Search Summary -->
-      <!-- Search Summary -->
-      <div class="mt-2 flex flex-wrap items-center gap-4 text-sm">
-        <div class="flex items-center gap-1">
-          <span class="font-medium">From:</span>
-          <span id="from"></span>
-        </div>
-        <i class="fas fa-arrow-right text-gray-400 text-xs"></i>
-        <div class="flex items-center gap-1">
-          <span class="font-medium">To:</span>
-          <span id="to"></span>
-        </div>
-        <div class="flex items-center gap-1">
-          <span class="font-medium">Date:</span>
-          <span id="date"></span>
-        </div>
-        <div class="flex items-center gap-1">
-          <span class="font-medium">Passengers:</span>
-          <span id="passengers"></span>
-        </div>
+        <a href="form-pemesanan.html" class="text-sky-600 hover:underline">Flight Search</a>
+        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+        <span>Booking</span>
       </div>
     </div>
   </div>
 
-  <div id="daftarPesawat"></div>
+  <main class="flex-1 container mx-auto py-8 px-28">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Booking Form -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Booking Header -->
+        <div>
+          <h1 class="text-2xl font-bold mb-6">Lengkapi Pemesanan Anda</h1>
+          
+          <!-- Flight Details Section -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">1</div>
+              <span class="font-medium">Detail Penerbangan</span>
+            </div>
+            <a href="list-pesawat.html" class="text-sky-600 text-sm hover:underline">Ubah Penerbangan</a>
+          </div>
+          
+          <!-- Flight Card -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="p-6">
+              <!-- Flight Summary -->
+              <div id="summaryInfo" class="space-y-2">
+                <!-- Flight details will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Passenger Information Section -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">2</div>
+            <span class="font-medium">Informasi Penumpang</span>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow">
+            <div class="p-6">
+              <form id="form-penumpang">
+                <div id="container-penumpang" class="space-y-6">
+                  <!-- Passenger forms will be generated here -->
+                </div>
+                
+                <div class="mt-8">
+                  <button type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white px-4 py-3 rounded-md font-medium transition duration-300">
+                    Simpan Data
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Price Summary Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="price-summary-container">
+          <div class="price-summary-scrollable space-y-6">
+            <!-- Price Summary Card -->
+            <div class="bg-white rounded-lg shadow">
+              <div class="p-6">
+                <h2 class="text-lg font-bold mb-1">Ringkasan Harga</h2>
+                <p class="text-sm text-gray-500 mb-4" id="routeSummary">Detail penerbangan</p>
+                
+                <div class="space-y-4">
+                  <div class="space-y-2" id="priceSummary">
+                    <!-- Price details will be populated by JavaScript -->
+                  </div>
+                  
+                  <div class="bg-slate-50 p-3 rounded-md text-sm space-y-2">
+                    <div class="flex items-start gap-2">
+                      <i class="fas fa-info-circle text-sky-600 mt-0.5"></i>
+                      <p>Ketentuan tarif dan kebijakan pembatalan berlaku</p>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <i class="fas fa-users text-sky-600 mt-0.5"></i>
+                      <p>Harga untuk semua penumpang</p>
+                    </div>
+                  </div>
+                  
+                  <button id="completeBookingBtn" class="w-full bg-sky-600 hover:bg-sky-700 text-white px-4 py-3 rounded-md font-medium">
+                    Selesaikan Pemesanan
+                  </button>
+                  
+                  <p class="text-xs text-center text-gray-500">
+                    Dengan mengklik "Selesaikan Pemesanan", Anda menyetujui
+                    <a href="#" class="text-sky-600 hover:underline">Syarat dan Ketentuan</a> kami
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Help Card -->
+            <div class="bg-white rounded-lg shadow">
+              <div class="p-4">
+                <h3 class="font-medium mb-2">Butuh Bantuan?</h3>
+                <p class="text-sm text-gray-500 mb-4">
+                  Tim layanan pelanggan kami tersedia 24/7 untuk membantu Anda dengan pemesanan.
+                </p>
+                <div class="flex justify-center">
+                  <button class="border border-gray-300 bg-white hover:bg-gray-50 px-3 py-1 rounded-md text-sm">
+                    <a href="https://wa.me/628998021267?text=Halo%20permisi%20admin,%20saya%20perlu%20bantuan%20karena%20terdapat%20sedikit%20masalah.%20🙏%20Mohon%20untuk%20dapat%20dibantu%20secepatnya.%20Terima%20kasih%20banyak!%20😊">Hubungi Kami</a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tombol kembali -->
+    <button class="back-btn mt-8" onclick="window.history.back()">Kembali</button>
+  </main>
 
-  <!-- Tombol kembali akan tetap di bawah layar -->
-  <button class="back-btn" onclick="window.history.back()">Kembali</button>
+  <!-- PDF Preview Modal (hidden by default) -->
+  <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 w-full max-w-4xl mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
+      <button id="closePdfBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
+        &times;
+      </button>
+      
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Konfirmasi Pemesanan</h2>
+      
+      <div id="pdfPreview" class="overflow-auto max-h-[70vh] p-4 border rounded-lg">
+        <!-- PDF preview content will be generated here -->
+      </div>
+      
+      <div class="mt-6 flex justify-between">
+        <button id="editBookingBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md text-sm font-medium">
+          Edit Pemesanan
+        </button>
+        <button id="downloadPdfBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+          Unduh PDF
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="border-t">
     <div class="container mx-auto py-8 md:py-12 px-24">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-
         <!-- Tautan Perusahaan -->
         <div>
           <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
@@ -190,7 +303,9 @@
     </div>
   </footer>
 
-  <script src="Data JavaScript/form-pemesanan.js"></script>
+  <!-- JavaScript -->
+  <script src="Data JavaScript/form-booking.js"></script>
+  <script src="Data JavaScript/pdf.js"></script>
   <script src="Data JavaScript/data.js"></script>
 </body>
 </html>
