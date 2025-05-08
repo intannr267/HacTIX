@@ -1,250 +1,755 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Form Pemesanan Penumpang</title>
-  <link rel="stylesheet" href="HacTixStyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackTIX - Lengkapi Pemesanan Anda</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="HacTixStyle.css">
+  
 </head>
-<body>
- <!-- Header awal -->
- <header class="sticky top-0 z-10 border-b bg-white">
-  <div class="container mx-auto flex h-16 items-center justify-between px-4">
-    <!-- Logo -->
-    <div class="flex items-center gap-2 font-bold ps-24">
-      <a href="mainIndex.html">
-        <span class="text-sky-600 text-3xl">Hack</span>
-        <span class="text-3xl">TIX</span>
-      </a>
-    </div>
-
-    <!-- Navigation Links (hidden on mobile) -->
-    <nav class="hidden md:flex items-center gap-6">
-      <a href="#" class="text-sm font-medium">Flights</a>
-    </nav>
-
-    <!-- Auth Buttons -->
-    <div id="authSection" class="flex items-center">
-      <!-- When logged out -->
-      <div id="loggedOutView" class="flex space-x-2 pe-24">
-        <div class="flex items-center gap-4">
-          <a href="#" class="text-sm font-medium text-black" id="signInBtn">Sign In</a>
-          <button class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-            <a href="register.html">Register</a>
+<body class="flex min-h-screen flex-col">
+  <!-- Header/Navigation -->
+  <header class="sticky top-0 z-10 border-b bg-white">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 font-bold ps-24">
+        <a href="mainIndex.html">
+          <span class="text-sky-600 text-3xl">Hack</span>
+          <span class="text-3xl">TIX</span>
+        </a>
+      </div>
+      
+      <!-- Navigation Links (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#" class="text-sm font-medium">Flights</a>
+      </nav>
+      
+      <!-- Auth Buttons -->
+      <div id="authSection" class="flex items-center">
+        <!-- When logged out -->
+        <div id="loggedOutView" class="flex space-x-2 pe-24">
+          <div class="flex items-center gap-4">
+            <a href="#" class="text-sm font-medium text-black" id="signInBtn">Sign In</a>
+            <button class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+              <a href="register.html">Register</a>
+            </button>
+          </div>
+        </div>
+        <!-- Ketika log in -->
+        <div id="loggedInView" class="hidden flex items-center space-x-4">
+          <span class="text-gray-700">Welcome, <span id="usernameDisplay" class="font-medium"></span></span>
+          <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium">
+            Logout
           </button>
         </div>
       </div>
-      <!-- Ketika log in -->
-      <div id="loggedInView" class="hidden flex items-center space-x-4">
-        <span class="text-gray-700">Welcome, <span id="usernameDisplay" class="font-medium"></span></span>
-        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium">
-          Logout
-        </button>
+
+      <!--Overlay-->
+      <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <!-- Popup -->
+        <div id="popup" class="bg-white rounded-xl p-12 w-full max-w-md mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
+          <!-- Close button -->
+          <button id="closeBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
+              &times;
+          </button>
+          
+          <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
+
+          <form id="popupLoginForm">
+            <div class="mb-4">
+                <label for="popupUsername" class="block text-gray-700 text-sm font-medium mb-2">Email or Username</label>
+                <input type="text" id="popupUsername" placeholder="Enter your email or username" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+            </div>
+            
+            <div class="mb-4">
+                <label for="popupPassword" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                <input type="password" id="popupPassword" placeholder="Enter your password" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+            </div>
+            
+            <div class="mb-4 flex items-center">
+              <input type="checkbox" id="popupRemember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+              <label for="popupRemember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+            </div>
+            
+            <!-- Error message -->
+            <div id="popupLoginError" class="hidden p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm"></div>
+            
+            <button type="submit" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Sign In
+            </button>
+            
+            <a href="#" class="block text-center text-blue-600 hover:underline text-sm mt-4">
+                Forgot password?
+            </a>
+            
+            <div class="mt-4 text-center">
+              <p class="text-sm text-gray-600">
+                Don't have an account? 
+                <a href="register.html" class="font-semibold text-blue-600 hover:text-blue-500">Register Now</a>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+  </header>
 
-    <!--Overlay-->
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-      <!-- Popup -->
-      <div id="popup" class="bg-white rounded-xl p-12 w-full max-w-md mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
-        <!-- Close button -->
-        <button id="closeBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
-            &times;
-        </button>
+  <!-- Breadcrumbs -->
+  <div class="bg-sky-50 py-4 border-b">
+    <div class="container mx-auto px-28">
+      <div class="flex items-center gap-2 text-sm">
+        <a href="mainIndex.html" class="text-sky-600 hover:underline">Home</a>
+        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+        <a href="list-pesawat.html" class="text-sky-600 hover:underline">Flight Search</a>
+        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+        <span>Booking</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-1 container mx-auto py-8 px-28">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Booking Form -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Booking Header -->
+        <div>
+          <h1 class="text-2xl font-bold mb-6">Lengkapi Pemesanan Anda</h1>
+          
+          <!-- Flight Details Section -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">1</div>
+              <span class="font-medium">Detail Penerbangan</span>
+            </div>
+            <a href="list-pesawat.html" class="text-sky-600 text-sm hover:underline">Ubah Penerbangan</a>
+          </div>
+          
+          <!-- Flight Card -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="p-6">
+              <!-- Flight Summary -->
+              <div id="summaryInfo" class="space-y-2">
+                <!-- Flight details will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
         
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
-
-        <form id="popupLoginForm">
-          <div class="mb-4">
-              <label for="popupUsername" class="block text-gray-700 text-sm font-medium mb-2">Email or Username</label>
-              <input type="text" id="popupUsername" placeholder="Enter your email or username" 
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+        <!-- Passenger Information Section -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">2</div>
+            <span class="font-medium">Informasi Penumpang</span>
           </div>
           
-          <div class="mb-4">
-              <label for="popupPassword" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
-              <input type="password" id="popupPassword" placeholder="Enter your password" 
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black">
+          <div class="bg-white rounded-lg shadow">
+            <div class="p-6">
+              <form id="form-penumpang">
+                <div id="container-penumpang" class="space-y-6">
+                  <!-- Passenger forms will be generated here -->
+                </div>
+                
+                <div class="mt-8">
+                  <button type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white px-4 py-3 rounded-md font-medium transition duration-300">
+                    Simpan Data
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          
-          <div class="mb-4 flex items-center">
-            <input type="checkbox" id="popupRemember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-            <label for="popupRemember" class="ml-2 block text-sm text-gray-700">Remember me</label>
-          </div>
-          
-          <!-- Error message -->
-          <div id="popupLoginError" class="hidden p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm"></div>
-          
-          <button type="submit" 
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-              Sign In
-          </button>
-          
-          <a href="#" class="block text-center text-blue-600 hover:underline text-sm mt-4">
-              Forgot password?
-          </a>
-          
-          <div class="mt-4 text-center">
-            <p class="text-sm text-gray-600">
-              Don't have an account? 
-              <a href="register.html" class="font-semibold text-blue-600 hover:text-blue-500">Register Now</a>
-            </p>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
-<!-- Header Akhir -->
-  <div class="penerbangan">
-    <!-- Search Summary Bar -->
-    <div class="bg-sky-50 py-4 border-b">
-      <div class="container mx-auto px-28">
-      <!-- Breadcrumbs -->
-        <div class="flex items-center gap-2 text-sm">
-          <a href="index.html" class="text-sky-600 hover:underline">Home</a>
-          <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-          <a href="list-pesawat.html" class="text-sky-600 hover:underline">Flight Search</a>
-          <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-          <span>Booking</span>
+      
+      <!-- Price Summary Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="price-summary-container">
+          <div class="price-summary-scrollable space-y-6">
+            <!-- Price Summary Card -->
+            <div class="bg-white rounded-lg shadow">
+              <div class="p-6">
+                <h2 class="text-lg font-bold mb-1">Ringkasan Harga</h2>
+                <p class="text-sm text-gray-500 mb-4" id="routeSummary">Detail penerbangan</p>
+                
+                <div class="space-y-4">
+                  <div class="space-y-2" id="priceSummary">
+                    <!-- Price details will be populated by JavaScript -->
+                  </div>
+                  
+                  <div class="bg-slate-50 p-3 rounded-md text-sm space-y-2">
+                    <div class="flex items-start gap-2">
+                      <i class="fas fa-info-circle text-sky-600 mt-0.5"></i>
+                      <p>Ketentuan tarif dan kebijakan pembatalan berlaku</p>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <i class="fas fa-users text-sky-600 mt-0.5"></i>
+                      <p>Harga untuk semua penumpang</p>
+                    </div>
+                  </div>
+                  
+                  <button id="completeBookingBtn" class="w-full bg-sky-600 hover:bg-sky-700 text-white px-4 py-3 rounded-md font-medium">
+                    Selesaikan Pemesanan
+                  </button>
+                  
+                  <p class="text-xs text-center text-gray-500">
+                    Dengan mengklik "Selesaikan Pemesanan", Anda menyetujui
+                    <a href="#" class="text-sky-600 hover:underline">Syarat dan Ketentuan</a> kami
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Help Card -->
+            <div class="bg-white rounded-lg shadow">
+              <div class="p-4">
+                <h3 class="font-medium mb-2">Butuh Bantuan?</h3>
+                <p class="text-sm text-gray-500 mb-4">
+                  Tim layanan pelanggan kami tersedia 24/7 untuk membantu Anda dengan pemesanan.
+                </p>
+                <div class="flex justify-center">
+                  <button class="border border-gray-300 bg-white hover:bg-gray-50 px-3 py-1 rounded-md text-sm">
+                    Hubungi Kami
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    
+    <!-- Tombol kembali -->
+    <button class="back-btn mt-8" onclick="window.history.back()">Kembali</button>
+  </main>
+
+  <!-- PDF Preview Modal (hidden by default) -->
+  <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 w-full max-w-4xl mx-4 relative transform scale-95 opacity-0 transition-all duration-300 shadow-2xl">
+      <button id="closePdfBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none">
+        &times;
+      </button>
+      
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Konfirmasi Pemesanan</h2>
+      
+      <div id="pdfPreview" class="overflow-auto max-h-[70vh] p-4 border rounded-lg">
+        <!-- PDF preview content will be generated here -->
+      </div>
+      
+      <div class="mt-6 flex justify-between">
+        <button id="editBookingBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md text-sm font-medium">
+          Edit Pemesanan
+        </button>
+        <button id="downloadPdfBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+          Unduh PDF
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="box-summary">
-    <div class="summary" id="summaryInfo"></div>
 
-    <form id="form-penumpang">
-        <div id="container-penumpang" class="passenger-form"></div>
-        <button class="btn-pemesanan" type="submit">Lanjutkan</button>
-    </form>
-
-   </div>
   <!-- Footer -->
-<footer class="border-t">
-  <div class="container mx-auto py-8 md:py-12 px-24">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+  <footer class="border-t">
+    <div class="container mx-auto py-8 md:py-12 px-24">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <!-- Tautan Perusahaan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Tentang Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Karir</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Media</a></li>
+          </ul>
+        </div>
 
-      <!-- Tautan Perusahaan -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
-        <ul class="space-y-2">
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Tentang Kami</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Karir</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Media</a></li>
-        </ul>
-      </div>
+        <!-- Tautan Dukungan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Pusat Bantuan</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Hubungi Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">FAQs</a></li>
+          </ul>
+        </div>
 
-      <!-- Tautan Dukungan -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
-        <ul class="space-y-2">
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Pusat Bantuan</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Hubungi Kami</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">FAQs</a></li>
-        </ul>
-      </div>
+        <!-- Tautan Hukum -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Legal</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Syarat</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Privasi</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Cookie</a></li>
+          </ul>
+        </div>
 
-      <!-- Tautan Hukum -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Legal</h3>
-        <ul class="space-y-2">
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Syarat</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Privasi</a></li>
-          <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Cookie</a></li>
-        </ul>
-      </div>
-
-      <!-- Newsletter -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
-        <p class="text-sm text-gray-500 mb-4">Dapatkan promo dan pembaruan</p>
-        <div class="flex gap-2">
-          <input type="email" placeholder="Alamat email" class="w-full rounded-md border border-gray-300 py-2 px-3">
-          <button class="border border-gray-300 bg-white hover:bg-gray-50 px-4 py-2 rounded-md">Langganan</button>
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
+          <p class="text-sm text-gray-500 mb-4">Dapatkan promo dan pembaruan</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Alamat email" class="w-full rounded-md border border-gray-300 py-2 px-3">
+            <button class="border border-gray-300 bg-white hover:bg-gray-50 px-4 py-2 rounded-md">Langganan</button>
+          </div>
         </div>
       </div>
+
+      <!-- Hak Cipta -->
+      <div class="mt-8 pt-8 border-t text-center text-sm text-gray-500">
+        © <span id="current-year"></span> HackTIX. Semua hak dilindungi.
+      </div>
     </div>
+  </footer>
 
-    <!-- Hak Cipta -->
-    <div class="mt-8 pt-8 border-t text-center text-sm text-gray-500">
-      © <span id="current-year"></span> HackTIX. Semua hak dilindungi.
-    </div>
-  </div>
-</footer>
-
-<script>
-      const data = JSON.parse(localStorage.getItem("pemesanan"));
-      const container = document.getElementById("container-penumpang");
-      const summaryInfo = document.getElementById("summaryInfo");
-
-  if (!data) {
-      document.body.innerHTML = "<p>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p>";
-      } else {
-      // Tampilkan ringkasan pesawat & pemesanan
+  <!-- JavaScript -->
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Load booking data from localStorage
+    const data = JSON.parse(localStorage.getItem("pemesanan"));
+    const container = document.getElementById("container-penumpang");
+    const summaryInfo = document.getElementById("summaryInfo");
+    const priceSummary = document.getElementById("priceSummary");
+    const routeSummary = document.getElementById("routeSummary");
+    
+    // Global variables to store booking data
+    let bookingData = {
+      flightDetails: {},
+      passengers: [],
+      pricing: {}
+    };
+    
+    // Check if data exists
+    if (!data) {
+      document.body.innerHTML = "<div class='container mx-auto p-8 text-center'><p class='text-xl'>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p></div>";
+    } else {
+      // Store flight details in bookingData
+      bookingData.flightDetails = {
+        maskapai: data.pesawatDipilih.maskapai,
+        kode: data.pesawatDipilih.kode,
+        dari: data.dari,
+        ke: data.ke,
+        tanggal: data.tanggal,
+        jam: data.pesawatDipilih.jam,
+        jamTiba: data.pesawatDipilih.jamTiba || "Perkiraan",
+        durasi: data.pesawatDipilih.durasi || "2j 30m",
+        kelas: "Ekonomi"
+      };
+      
+      // Display flight summary
       const pesawat = data.pesawatDipilih;
       summaryInfo.innerHTML = `
-          <h2 class="ringkasan">Ringkasan Penerbangan</h2>
-          <p><strong>Dari:</strong> ${data.dari}</p>
-          <p><strong>Ke:</strong> ${data.ke}</p>
-          <p><strong>Tanggal:</strong> ${data.tanggal}</p>
-          ${data.tanggalKembali ? `<p><strong>Tanggal Kembali:</strong> ${data.tanggalKembali}</p>` : ""}
-          <p><strong>Pesawat:</strong> ${pesawat.maskapai} (${pesawat.kode})</p>
-          <p><strong>Jam Keberangkatan:</strong> ${pesawat.jam}</p>
-          <p><strong>Harga per Penumpang:</strong> Rp ${pesawat.harga.toLocaleString("id-ID")}</p>
-          <p><strong>Penumpang:</strong> ${data.jumlahDewasa} Dewasa, ${data.jumlahAnak} Anak</p>
-      `;
-      let index = 1;
-
-      // Dewasa
-      for (let i = 0; i < data.jumlahDewasa; i++) {
-          const div = document.createElement("div");
-          div.className = "form-group";
-          div.innerHTML = `
-          <h3 class="input-id">Penumpang Dewasa ${index}</h3>
-          <div class="input-id">
-            <div class="fieldinput">
-              <label class="input-idfield">Nama Lengkap</label>
-              <input class="input-idinput" type="text" name="nama_d_${i}" required />
-            </div>
-            <div class="fieldinput">
-              <label class="input-idfield">NIK</label>
-              <input class="input-idinput" type="text" name="nik_d_${i}" required pattern="\\d{16}" placeholder="16 digit NIK" />
+        <!-- Airline Info -->
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://placehold.co/40x40/sky/white?text=${pesawat.kode.substring(0, 2)}" alt="${pesawat.maskapai}" class="h-10 w-10 rounded-full">
+            <div>
+              <div class="font-medium">${pesawat.maskapai}</div>
+              <div class="text-xs text-gray-500">Penerbangan #${pesawat.kode}</div>
             </div>
           </div>
-          `;
-      container.appendChild(div);
-      index++;
-      } 
-
-      // Anak
-      for (let i = 0; i < data.jumlahAnak; i++) {
-          const div = document.createElement("div");
-          div.className = "form-group";
-          div.innerHTML = `
-          <h3 class="input-id">Penumpang Anak ${index}</h3>
-          <label class="input-idfield">Nama Lengkap</label>
-          <input class="input-idinput" type="text" name="nama_a_${i}" required />
-          `;
-          container.appendChild(div);
-          index++;
+          <div class="text-right">
+            <div class="text-sm font-medium">Ekonomi</div>
+            <div class="text-xs text-gray-500">${data.tanggal}</div>
+          </div>
+        </div>
+        
+        <!-- Flight Route -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div>
+            <div class="text-sm text-gray-500">Keberangkatan</div>
+            <div class="text-lg font-semibold">${pesawat.jam}</div>
+            <div class="text-sm">${data.dari}</div>
+          </div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="text-xs text-gray-500 mb-1">${pesawat.durasi || "2j 30m"}</div>
+            <div class="relative w-full flex items-center">
+              <div class="h-0.5 bg-sky-200 w-full"></div>
+              <i class="fas fa-plane absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-600 transform -rotate-90"></i>
+            </div>
+            <div class="text-xs text-green-600 mt-1">Langsung</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm text-gray-500">Kedatangan</div>
+            <div class="text-lg font-semibold">${pesawat.jamTiba || "Perkiraan"}</div>
+            <div class="text-sm">${data.ke}</div>
+          </div>
+        </div>
+      `;
+      
+      // Update route summary
+      routeSummary.textContent = `Penerbangan dari ${data.dari} ke ${data.ke}`;
+      
+      // Calculate pricing
+      const adultTotal = pesawat.harga * data.jumlahDewasa;
+      const childTotal = pesawat.harga * 0.75 * data.jumlahAnak; // 25% discount for children
+      const taxes = (adultTotal + childTotal) * 0.1; // 10% taxes
+      const total = adultTotal + childTotal + taxes;
+      
+      // Store pricing in bookingData
+      bookingData.pricing = {
+        adultFare: pesawat.harga,
+        adultCount: data.jumlahDewasa,
+        adultTotal: adultTotal,
+        childFare: pesawat.harga * 0.75,
+        childCount: data.jumlahAnak,
+        childTotal: childTotal,
+        taxes: taxes,
+        total: total
+      };
+      
+      // Update price summary
+      priceSummary.innerHTML = `
+        <div class="flex justify-between">
+          <span class="text-sm">Dewasa (${data.jumlahDewasa})</span>
+          <span class="text-sm">Rp ${adultTotal.toLocaleString("id-ID")}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-sm">Anak (${data.jumlahAnak})</span>
+          <span class="text-sm">Rp ${childTotal.toLocaleString("id-ID")}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-sm">Pajak & Biaya</span>
+          <span class="text-sm">Rp ${taxes.toLocaleString("id-ID")}</span>
+        </div>
+        <hr>
+        <div class="flex justify-between font-medium">
+          <span>Total</span>
+          <span>Rp ${total.toLocaleString("id-ID")}</span>
+        </div>
+      `;
+      
+      // Generate passenger forms
+      let index = 1;
+      
+      // Adult passengers
+      for (let i = 0; i < data.jumlahDewasa; i++) {
+        const div = document.createElement("div");
+        div.className = "form-group border-b pb-6 mb-6";
+        div.innerHTML = `
+          <h3 class="text-lg font-semibold mb-4">Penumpang Dewasa ${index}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label for="nama_d_${i}" class="block text-sm font-medium">Nama Lengkap</label>
+              <input id="nama_d_${i}" name="nama_d_${i}" type="text" required 
+                     class="w-full rounded-md border border-gray-300 py-2 px-3">
+            </div>
+            <div class="space-y-2">
+              <label for="nik_d_${i}" class="block text-sm font-medium">NIK</label>
+              <input id="nik_d_${i}" name="nik_d_${i}" type="text" required pattern="\\d{16}" placeholder="16 digit NIK" 
+                     class="w-full rounded-md border border-gray-300 py-2 px-3">
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+        index++;
       }
-  }
-
-  // Submit form
-  document.getElementById("form-penumpang").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const entries = Array.from(formData.entries());
-    console.log("Data penumpang:", entries);
-
-    localStorage.setItem("dataPenumpang", JSON.stringify(entries));
-
-    alert("Data penumpang berhasil disimpan.");
-  });
-</script>
+      
+      // Child passengers - now with NIK field
+      for (let i = 0; i < data.jumlahAnak; i++) {
+        const div = document.createElement("div");
+        div.className = "form-group border-b pb-6 mb-6";
+        div.innerHTML = `
+          <h3 class="text-lg font-semibold mb-4">Penumpang Anak ${index}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label for="nama_a_${i}" class="block text-sm font-medium">Nama Lengkap</label>
+              <input id="nama_a_${i}" name="nama_a_${i}" type="text" required 
+                     class="w-full rounded-md border border-gray-300 py-2 px-3">
+            </div>
+            <div class="space-y-2">
+              <label for="nik_a_${i}" class="block text-sm font-medium">NIK</label>
+              <input id="nik_a_${i}" name="nik_a_${i}" type="text" required pattern="\\d{16}" placeholder="16 digit NIK" 
+                     class="w-full rounded-md border border-gray-300 py-2 px-3">
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+        index++;
+      }
+    }
+    
+    // Handle form submission
+    document.getElementById("form-penumpang").addEventListener("submit", function(e) {
+      e.preventDefault();
+    
+      const formData = new FormData(e.target);
+      const entries = Array.from(formData.entries());
+    
+      // Process passenger data
+      const passengers = [];
+    
+      // Process adult passengers
+      for (let i = 0; i < data.jumlahDewasa; i++) {
+        const nama = formData.get(`nama_d_${i}`);
+        const nik = formData.get(`nik_d_${i}`);
+    
+        if (nama && nik) {
+          passengers.push({
+            type: "Dewasa",
+            name: nama,
+            nik: nik
+          });
+        }
+      }
+    
+      // Process child passengers
+      for (let i = 0; i < data.jumlahAnak; i++) {
+        const nama = formData.get(`nama_a_${i}`);
+        const nik = formData.get(`nik_a_${i}`);
+    
+        if (nama && nik) {
+          passengers.push({
+            type: "Anak",
+            name: nama,
+            nik: nik
+          });
+        }
+      }
+    
+      // Store passenger data
+      bookingData.passengers = passengers;
+    
+      // Save to localStorage
+      localStorage.setItem("dataPenumpang", JSON.stringify(passengers));
+      localStorage.setItem("bookingComplete", JSON.stringify(bookingData));
+    
+      // Show success message
+      alert("Data penumpang berhasil disimpan. Silakan klik 'Selesaikan Pemesanan' untuk melanjutkan.");
+    });
+    
+    // Complete booking button
+    document.getElementById("completeBookingBtn").addEventListener("click", function() {
+      // Check if passenger data is available
+      const passengerData = localStorage.getItem("dataPenumpang");
+      
+      if (passengerData) {
+        // Generate PDF preview
+        const bookingComplete = JSON.parse(localStorage.getItem("bookingComplete"));
+        generatePdfPreview(bookingComplete);
+      } else {
+        alert("Silakan isi data penumpang terlebih dahulu dan klik 'Lanjutkan'.");
+      }
+    });
+    
+    // Generate PDF preview
+    function generatePdfPreview(bookingData) {
+      const pdfPreview = document.getElementById("pdfPreview");
+      const modal = document.getElementById("pdfModal");
+      
+      // Create PDF preview content
+      pdfPreview.innerHTML = `
+        <div class="pdf-content">
+          <!-- Header -->
+          <div class="flex items-center justify-between mb-6 pb-4 border-b">
+            <div class="flex items-center gap-2">
+              <span class="text-sky-600 text-3xl font-bold">Hack</span>
+              <span class="text-3xl font-bold">TIX</span>
+            </div>
+            <div class="text-sm text-gray-500">E-Tiket Penerbangan</div>
+          </div>
+          
+          <!-- Booking Reference -->
+          <div class="bg-sky-50 p-4 rounded-lg mb-6">
+            <div class="flex justify-between items-center">
+              <div>
+                <div class="text-sm text-gray-500">Kode Booking</div>
+                <div class="text-xl font-bold">${generateBookingCode()}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-gray-500">Tanggal Pemesanan</div>
+                <div class="font-medium">${new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})}</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Flight Details -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Detail Penerbangan</h3>
+            <div class="bg-white border rounded-lg p-4">
+              <!-- Airline Info -->
+              <div class="flex items-center gap-3 mb-4 pb-3 border-b">
+                <img src="https://placehold.co/40x40/sky/white?text=${bookingData.flightDetails.kode.substring(0, 2)}" alt="${bookingData.flightDetails.maskapai}" class="h-10 w-10 rounded-full">
+                <div>
+                  <div class="font-medium">${bookingData.flightDetails.maskapai}</div>
+                  <div class="text-xs text-gray-500">Penerbangan #${bookingData.flightDetails.kode}</div>
+                </div>
+                <div class="ml-auto text-right">
+                  <div class="text-sm font-medium">${bookingData.flightDetails.kelas}</div>
+                  <div class="text-xs text-gray-500">${bookingData.flightDetails.tanggal}</div>
+                </div>
+              </div>
+              
+              <!-- Flight Route -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <div class="text-sm text-gray-500">Keberangkatan</div>
+                  <div class="text-lg font-semibold">${bookingData.flightDetails.jam}</div>
+                  <div class="text-sm">${bookingData.flightDetails.dari}</div>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                  <div class="text-xs text-gray-500 mb-1">${bookingData.flightDetails.durasi}</div>
+                  <div class="relative w-full flex items-center">
+                    <div class="h-0.5 bg-sky-200 w-full"></div>
+                    <i class="fas fa-plane absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-600 transform -rotate-90"></i>
+                  </div>
+                  <div class="text-xs text-green-600 mt-1">Langsung</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm text-gray-500">Kedatangan</div>
+                  <div class="text-lg font-semibold">${bookingData.flightDetails.jamTiba}</div>
+                  <div class="text-sm">${bookingData.flightDetails.ke}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Passenger Details -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Detail Penumpang</h3>
+            <div class="bg-white border rounded-lg overflow-hidden">
+              <table class="w-full">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">No.</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Tipe</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Nama</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">NIK</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y">
+                  ${bookingData.passengers.map((passenger, index) => `
+                    <tr>
+                      <td class="px-4 py-3 text-sm">${index + 1}</td>
+                      <td class="px-4 py-3 text-sm">${passenger.type}</td>
+                      <td class="px-4 py-3 text-sm font-medium">${passenger.name}</td>
+                      <td class="px-4 py-3 text-sm">${passenger.nik}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Price Summary -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Ringkasan Harga</h3>
+            <div class="bg-white border rounded-lg p-4">
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-sm">Dewasa (${bookingData.pricing.adultCount})</span>
+                  <span class="text-sm">Rp ${bookingData.pricing.adultTotal.toLocaleString("id-ID")}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Anak (${bookingData.pricing.childCount})</span>
+                  <span class="text-sm">Rp ${bookingData.pricing.childTotal.toLocaleString("id-ID")}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Pajak & Biaya</span>
+                  <span class="text-sm">Rp ${bookingData.pricing.taxes.toLocaleString("id-ID")}</span>
+                </div>
+                <hr>
+                <div class="flex justify-between font-medium">
+                  <span>Total</span>
+                  <span>Rp ${bookingData.pricing.total.toLocaleString("id-ID")}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Payment Section -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Metode Pembayaran</h3>
+            <div class="bg-white border rounded-lg p-4">
+              <div class="flex flex-col items-center">
+                <p class="text-center mb-3">Silakan scan kode QRIS di bawah ini untuk melakukan pembayaran</p>
+                <div class="border p-2 mb-3">
+                  <img src="https://placehold.co/200x200/sky/white?text=QRIS" alt="QRIS Code" class="h-48 w-48">
+                </div>
+                <p class="text-sm text-gray-500 mb-1">ID Pembayaran: HACKTIX-${generateBookingCode()}</p>
+                <p class="text-sm text-gray-500">Jumlah: Rp ${bookingData.pricing.total.toLocaleString("id-ID")}</p>
+                <div class="mt-4 p-3 bg-yellow-50 rounded-md text-sm">
+                  <p class="text-center font-medium text-yellow-700">Pembayaran akan kedaluwarsa dalam 24 jam</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Footer -->
+          <div class="mt-8 pt-4 border-t text-center text-sm text-gray-500">
+            <p>Terima kasih telah memilih HackTIX untuk perjalanan Anda.</p>
+            <p class="mt-1">Untuk bantuan, hubungi kami di support@hacktix.com atau +62 123 4567 890</p>
+          </div>
+        </div>
+      `;
+      
+      // Show modal
+      modal.style.display = "flex";
+      setTimeout(() => {
+        modal.querySelector(".bg-white").style.opacity = "1";
+        modal.querySelector(".bg-white").style.transform = "scale(1)";
+      }, 10);
+    }
+    
+    // Generate random booking code
+    function generateBookingCode() {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let code = "";
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+    
+    // Close PDF modal
+    document.getElementById("closePdfBtn").addEventListener("click", function() {
+      const modal = document.getElementById("pdfModal");
+      const modalContent = modal.querySelector(".bg-white");
+      
+      modalContent.style.opacity = "0";
+      modalContent.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300);
+    });
+    
+    // Edit booking button
+    document.getElementById("editBookingBtn").addEventListener("click", function() {
+      const modal = document.getElementById("pdfModal");
+      const modalContent = modal.querySelector(".bg-white");
+      
+      modalContent.style.opacity = "0";
+      modalContent.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300);
+    });
+    
+    // Download PDF button
+    document.getElementById("downloadPdfBtn").addEventListener("click", function() {
+      const { jsPDF } = window.jspdf;
+      const pdfContent = document.getElementById("pdfPreview");
+      
+      // Create PDF
+      html2canvas(pdfContent).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('HackTIX-Booking.pdf');
+      });
+    });
+  </script>
   <script src="data.js"></script>
 </body>
 </html>
