@@ -43,7 +43,7 @@ function updateAuthUI() {
         // Redirect if on login/register page and already logged in
         const currentPage = window.location.pathname.split('/').pop();
         if (currentPage === 'login.html' || currentPage === 'register.html') {
-            window.location.href = 'mainIndex.html';
+            window.location.href = 'form-main.html';
         }
     } else {
         if (loggedOutView) loggedOutView.classList.remove('hidden');
@@ -222,7 +222,7 @@ if (loginForm) {
         }
         
         // Redirect to home page
-        window.location.href = 'mainIndex.html';
+        window.location.href = 'form-main.html';
     });
 }
 
