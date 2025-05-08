@@ -24,15 +24,15 @@ body{
 
   /* header */
   #box-header {
-      width: 100%;
-      height: 107px;
-      border-radius: 0px 0px 42px 42px;
-      background: #2270B5;
-      /* opacity: 80%; */
-      position: fixed;
-      top: 0;
-      left: 0;
-      }
+    width: 100%;
+    height: 107px;
+    border-radius: 0px 0px 42px 42px;
+    background: #2270B5;
+    /* opacity: 80%; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    }
   .teks-header {
       font-family: 'inter','Arial', sans-serif;
       color: #ffffff;
