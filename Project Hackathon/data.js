@@ -163,7 +163,7 @@ if (registerForm) {
         localStorage.setItem('users', JSON.stringify(users));
         
         // Show success message
-        registerSuccess.textContent = 'Registration successful! Redirecting to home page...';
+        registerSuccess.textContent = 'Registration successful!';
         registerSuccess.classList.remove('hidden');
         
         // Reset form
@@ -171,6 +171,11 @@ if (registerForm) {
         
         // Store the username for the login popup
         localStorage.setItem('lastRegisteredUser', username);
+
+        // Redirect to home page after 2 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html?showLogin=true';
+        }, 1000);
     });
 }
 
