@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HacTIX</title>
   <link rel="stylesheet" href="style.css">
-
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
 </head>
 <body>
   <!-- Header awal -->
-  <header class="header">
+  <header class="header font-bold">
     <a href="#home" class="header-title">Hack<span>TIX</span></a>
     
     <div class="navbar">
@@ -85,17 +84,16 @@
         </form>
       </div>
     </div>
-
   </header>
   <!-- Header Akhir -->
-  <div>
+  
   <!-- Banner -->
-  <section class="banner screen" id="home">
+  <section class="banner screen font-semibold" id="home">
     <main class="content">
         <h1>Liburan Cuy........</h1>
         <p>Berliburlah sebelum kesibukan menghantuimu</p>
     </main>
- </section>
+  </section>
   <!-- Banner -->
 
   <!-- preview vidio liburan -->
@@ -111,96 +109,200 @@
 
   <!-- pemesanan Tiket -->
   <section class="pemesanan screen" id="pemesanan-tiket">
-    <main>
-    <div class="box-pemesanan">
-      <h1>Pemesanan Tiket</h1>
-
-      <!-- lokasi -->
-      <div class="dv-pemesanan">
-        <div class="ig-lokasi">
-          <div class="field">
-            <label>Dari</label>
-            <select id="dari">
-              <option value="">Pilih Kota</option>
-              <option value="Manggarai">Manggarai</option>
-              <option value="Kota Tua">Kota Tua</option>
-              <option value="Tanah Abang">Tanah Abang</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Ke</label>
-            <select id="ke">
-              <option value="">Pilih Kota</option>
-              <option value="Manggarai">Manggarai</option>
-              <option value="Kota Tua">Kota Tua</option>
-              <option value="Rawa Buntu">Rawa Buntu</option>
-            </select>
-          </div>
+    <!-- Hero Section with Gradient Background -->
+    <div class="relative">
+      <!-- Gradient Background -->
+      <div class="absolute inset-0 gradient-bg"></div>
+      
+      <!-- Hero Content -->
+      <div class="container mx-auto relative py-20 text-white px-4">
+        <div class="max-w-2xl space-y-4">
+          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Temukan Perjalanan Terbaik Anda</h1>
+          <p class="text-lg">Cari dan bandingkan tiket dari berbagai maskapai</p>
         </div>
       </div>
-      <!-- lokasi -->
-
-      <!-- Tanggal Keberangkatan -->
-      <div>
-      <!-- Tanggal dan Toggle Pulang Pergi -->
-        <div class="ig-tanggal">
-            <div class="field">
-                <label>Tanggal Keberangkatan</label>
-                <input type="date" id="tanggalPergi" />
+    </div>
+    
+    <!-- Search Form Section -->
+    <div class="container mx-auto py-8 px-4">
+      <div class="mx-auto max-w-4xl -mt-16 bg-white rounded-lg shadow-lg">
+        <div class="p-6">
+          <!-- Tabs for Trip Type -->
+          <div class="mb-6">
+            <div class="grid w-full grid-cols-2 border rounded-lg overflow-hidden">
+              <button class="py-2 px-4 bg-sky-600 text-white font-medium" id="round-trip-tab">Pulang Pergi</button>
+              <button class="py-2 px-4 bg-white hover:bg-gray-50" id="one-way-tab">Sekali Jalan</button>
             </div>
-            <!-- Tanggal Balik -->
-            <div class="ig-tanggal" id="field-tanggal-balik">
-              <div class="field">
-                <label>Tanggal Balik</label>
-                <input type="date" id="tanggalBalik" disabled />
+          </div>
+          
+          <!-- Hidden toggle for compatibility with existing JS -->
+          <div class="hidden">
+            <label class="switch">
+              <input type="checkbox" id="togglePulangPergi" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          
+          <!-- Search Form -->
+          <form id="flight-search-form" class="space-y-6">
+            <!-- Origin & Destination -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="dari" class="block text-sm font-medium">Dari</label>
+                <div class="relative">
+                  <i class="fas fa-plane-departure absolute left-3 top-3 text-gray-400"></i>
+                  <select id="dari" class="pl-10 w-full rounded-md border border-gray-300 py-2 px-3">
+                    <option value="">Pilih Kota</option>
+                    <option value="Jakarta">Jakarta</option>
+                    <option value="Bandung">Bandung</option>
+                    <option value="Surabaya">Surabaya</option>
+                    <option value="Yogyakarta">Yogyakarta</option>
+                    <option value="Bali">Bali</option>
+                    <option value="Manggarai">Manggarai</option>
+                    <option value="Kota Tua">Kota Tua</option>
+                    <option value="Tanah Abang">Tanah Abang</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label for="ke" class="block text-sm font-medium">Ke</label>
+                <div class="relative">
+                  <i class="fas fa-plane-arrival absolute left-3 top-3 text-gray-400"></i>
+                  <select id="ke" class="pl-10 w-full rounded-md border border-gray-300 py-2 px-3">
+                    <option value="">Pilih Kota</option>
+                    <option value="Jakarta">Jakarta</option>
+                    <option value="Bandung">Bandung</option>
+                    <option value="Surabaya">Surabaya</option>
+                    <option value="Yogyakarta">Yogyakarta</option>
+                    <option value="Bali">Bali</option>
+                    <option value="Manggarai">Manggarai</option>
+                    <option value="Kota Tua">Kota Tua</option>
+                    <option value="Rawa Buntu">Rawa Buntu</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="field-toggle">
-              <label>Pulang Pergi</label>
-              <label class="switch">
-              <input type="checkbox" id="togglePulangPergi" />
-              <span class="slider"></span>
-              </label>
+            
+            <!-- Dates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="tanggalPergi" class="block text-sm font-medium">Tanggal Keberangkatan</label>
+                <div class="relative">
+                  <i class="fas fa-calendar absolute left-3 top-3 text-gray-400"></i>
+                  <input id="tanggalPergi" type="date" 
+                         class="pl-10 w-full rounded-md border border-gray-300 py-2 px-3">
+                </div>
+              </div>
+              <div class="space-y-2" id="field-tanggal-balik">
+                <label for="tanggalBalik" class="block text-sm font-medium">Tanggal Balik</label>
+                <div class="relative">
+                  <i class="fas fa-calendar absolute left-3 top-3 text-gray-400"></i>
+                  <input id="tanggalBalik" type="date" 
+                         class="pl-10 w-full rounded-md border border-gray-300 py-2 px-3">
+                </div>
+              </div>
             </div>
+            
+            <!-- Passengers -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label class="block text-sm font-medium">Dewasa</label>
+                <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                  <button type="button" id="btnPenguranganD" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium">-</button>
+                  <div id="jumlahDewasa" class="flex-1 text-center py-2">0</div>
+                  <button type="button" id="btnPenambahanD" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium">+</button>
+                </div>
+                <p class="text-xs text-gray-500">Usia 12+ tahun</p>
+              </div>
+              <div class="space-y-2">
+                <label class="block text-sm font-medium">Anak</label>
+                <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                  <button type="button" id="btnPenguranganA" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium">-</button>
+                  <div id="jumlahAnak" class="flex-1 text-center py-2">0</div>
+                  <button type="button" id="btnPenambahanA" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium">+</button>
+                </div>
+                <p class="text-xs text-gray-500">Usia 2-11 tahun</p>
+              </div>
+            </div>
+            
+            <!-- Passenger Summary -->
+            <div class="bg-gray-50 p-4 rounded-md">
+              <div class="flex justify-between">
+                <div class="flex items-center gap-2">
+                  <i class="fas fa-user text-sky-600"></i>
+                  <span id="p-Dewasa" class="text-sm">Dewasa: 0</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fas fa-child text-sky-600"></i>
+                  <span id="p-Anak" class="text-sm">Anak: 0</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Search Button -->
+            <div class="flex justify-center mt-6">
+              <button type="button" id="btnPesan" class="w-full md:w-auto bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-md text-center font-medium">
+                Pesan Tiket
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-      <!-- Tanggal Keberangkatan -->
-
-      <!-- Penumpang -->
-      <div>
-        <div class="passengers">
-            <label>Jumlah Penumpang</label>
-        </div>
-          <div class="passengers-in">
-            <span class="passengers-cap" id="p-Dewasa">Dewasa:</span>
-            <span class="passengers-cap" id="p-Anak">Anak: </span>
-          </div>
-          <div class="input-passengers">
-            <div class="number-passengers">
-              <label>Dewasa</label>
-              <button class="calculation2" id="btnPenguranganD">-</button>
-              <span class="counting" id="jumlahDewasa">0</span>
-              <button class="calculation3" id="btnPenambahanD">+</button>
-            </div>
-            <div class="number-passengers">
-              <label>Anak</label>
-              <button class="calculation1" id="btnPenguranganA">-</button>
-              <span class="counting" id="jumlahAnak">0</span>
-              <button class="calculation3" id="btnPenambahanA">+</button>
-            </div>
-          </div>
-      </div>
-      <!-- Penumpang -->
-
-      <!-- next button -->
-      <button class="pesan-tiket-btn" id="btnPesan">Pesan</button>
-      <!-- next button -->
-
-      </div>
-    </main>
+    </div>
   </section>
-    <!-- pemesanan Tiket -->
-  </div>
+  <!-- pemesanan Tiket -->
+  
+  <!-- Footer -->
+  <footer class="border-t bg-slate-50 mt-12">
+    <div class="container mx-auto py-8 md:py-12 px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <!-- Tautan Perusahaan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Perusahaan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Tentang Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Karir</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Media</a></li>
+          </ul>
+        </div>
+
+        <!-- Tautan Dukungan -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Pusat Bantuan</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Hubungi Kami</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Tautan Hukum -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Legal</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Syarat</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Privasi</a></li>
+            <li><a href="#" class="text-sm text-gray-500 hover:text-gray-900">Cookie</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
+          <p class="text-sm text-gray-500 mb-4">Dapatkan promo dan pembaruan</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Alamat email" class="w-full rounded-md border border-gray-300 py-2 px-3">
+            <button class="border border-gray-300 bg-white hover:bg-gray-50 px-4 py-2 rounded-md">Langganan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hak Cipta -->
+      <div class="mt-8 pt-8 border-t text-center text-sm text-gray-500">
+        © <span id="current-year"></span> HackTIX. Semua hak dilindungi.
+      </div>
+    </div>
+  </footer>
   <script src="Data JavaScript/form-main.js"></script>
   <script src="Data JavaScript/data.js"></script>
 </body>
