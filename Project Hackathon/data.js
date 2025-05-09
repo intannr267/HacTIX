@@ -314,6 +314,22 @@ function checkUrlParams() {
 }
 
 // Initialize UI on page load
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header");
+    const pesanTiket = document.getElementById("pesanTiket");
+    const signInBtn = document.getElementById("signInBtn");
+  
+    if (window.scrollY > header.offsetHeight) {
+      header.classList.add("scrolled");
+      pesanTiket.classList.add("scrolled");
+      signInBtn.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+      pesanTiket.classList.remove("scrolled");
+      signInBtn.classList.remove("scrolled");
+    }
+  });
+
 document.addEventListener('DOMContentLoaded', function() {
     updateAuthUI();
     checkUrlParams();

@@ -13,19 +13,21 @@
 <body>
   <!-- Header awal -->
   <header class="header">
-    <a href="#home" class="header-title">Hack<span>TIX</span></a>
-    
+    <a href="#home" class="header-title"><span3>H</span3><span>ack</span><span2>TIX</span2></a>
+    <nav class="navbar">
+      
+    </nav>        
     <div class="navbar">
-        <a href="#pemesanan-tiket">Pesan</a>
     </div>
-
-     <!-- Auth Buttons -->
+    
+    <!-- Auth Buttons -->
     <div id="authSection" class="flex items-center">
       <!-- When logged out -->
       <div id="loggedOutView" class="flex space-x-2">
         <div class="flex items-center gap-4">
-          <a href="#" class="text-sm font-medium text-black" id="signInBtn">Sign In</a>
-          <button class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+          <a href="#pemesanan-tiket" class="btnAtas" id="pesanTiket">Pesan Tiket</a>
+          <a href="#" class="btnAtas" id="signInBtn">Sign In</a>
+          <button class="btn-primary">
             <a href="register.html">Register</a>
           </button>
         </div>
@@ -96,7 +98,7 @@
   <!-- Banner -->
   <section class="banner screen" id="home">
     <main class="content">
-        <h1>Liburan Cuy........</h1>
+        <h1>Liburan Cuy ........</h1>
         <p>Berliburlah sebelum kesibukan menghantuimu</p>
     </main>
  </section>
@@ -104,8 +106,9 @@
 
   <!-- preview vidio liburan -->
   <section class="preview screen">
-    <h1 class="title-preview">Destinations</h1>
-    <div class="p-vidio">
+    <h1 style="text-align: center; font-size: 2rem; font-weight: bold; color: #001F54;">✈️ Your Next Adventure Awaits</h1>
+    <div class="p-vidio" >
+      <div class="p-vidio"></div>
         <video src="Asset/Vidio/video pemandangan pantai lombok , indonesia - no copyright.mp4" muted loop autoplay></video> 
         <video src="Asset/Vidio/Video Pemandangan Laut No Copyright.mp4" muted loop autoplay></video>
         <video src="Asset/Vidio/Video Background Sunset (No Copyright) 30 Detik_2.mp4" muted loop autoplay></video>
@@ -114,10 +117,10 @@
   <!-- preview vidio liburan -->
 
   <!-- pemesanan Tiket -->
-  <section class="pemesanan screen" id="pemesanan-tiket">
+  <section class="banner2 screen"  id="pemesanan-tiket">
     <main>
-    <div class="box-pemesanan">
-        <h1>Pemesanan Tiket</h1>
+    <div class="box-pemesanan" >
+        <h1 >Pemesanan Tiket</h1>
 
         <!-- lokasi -->
         <div class="dv-pemesanan">
@@ -280,20 +283,7 @@
       window.location.href = "list-pesawat.html";
     });
 
-    //Scrolling page
-    window.addEventListener("scroll", function () {
-      const header = document.querySelector(".header");
-      const headerHeight = header.offsetHeight;
-      const headerTitle = document.querySelector(".header-title")
-
-      if (window.scrollY > headerHeight) {
-        header.style.backgroundColor = "white"; // warna setelah discroll
-        headerTitle.style.color = 'rgb(86, 179, 255)'
-      } else {
-        header.style.backgroundColor = "transparent"; // warna awal
-        headerTitle.style.color = 'white'
-      }
-    });
+  
   </script>
   <script src="data.js"></script>
 </body>

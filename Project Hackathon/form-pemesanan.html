@@ -314,6 +314,7 @@
     
     // Load booking data from localStorage
     const data = JSON.parse(localStorage.getItem("pemesanan"));
+    console.log("Data dari localStorage:", data);
     const container = document.getElementById("container-penumpang");
     const summaryInfo = document.getElementById("summaryInfo");
     const priceSummary = document.getElementById("priceSummary");
@@ -327,10 +328,13 @@
     };
     
     // Check if data exists
-    if (!data) {
+    if (!data || !data.pesawatDipilih) {
       document.body.innerHTML = "<div class='container mx-auto p-8 text-center'><p class='text-xl'>Data pemesanan tidak ditemukan. Silakan kembali ke halaman awal.</p></div>";
     } else {
       // Store flight details in bookingData
+      const pesawat = data.pesawatDipilih;
+      const jamTiba = pesawat.jamTiba || "Tidak tersedia";
+      console.log("Jam Tiba:", jamTiba);
       bookingData.flightDetails = {
         maskapai: data.pesawatDipilih.maskapai,
         kode: data.pesawatDipilih.kode,
@@ -338,13 +342,16 @@
         ke: data.ke,
         tanggal: data.tanggal,
         jam: data.pesawatDipilih.jam,
-        jamTiba: data.pesawatDipilih.jamTiba || "Perkiraan",
+        jamTiba: data.pesawatDipilih.jamTiba,
         durasi: data.pesawatDipilih.durasi || "2j 30m",
         kelas: "Ekonomi"
       };
       
+//       console.log("Data dari localStorage:", data);
+// console.log("Pesawat yang dipilih:", data.pesawatDipilih);
+// console.log("Jam Tiba:", data.pesawatDipilih.jamTiba);
+      
       // Display flight summary
-      const pesawat = data.pesawatDipilih;
       summaryInfo.innerHTML = `
         <!-- Airline Info -->
         <div class="flex items-center justify-between mb-4">
@@ -378,7 +385,7 @@
           </div>
           <div class="text-right">
             <div class="text-sm text-gray-500">Kedatangan</div>
-            <div class="text-lg font-semibold">${pesawat.jamTiba || "Perkiraan"}</div>
+            <div class="text-lg font-semibold">${pesawat.jamTiba}</div>
             <div class="text-sm">${data.ke}</div>
           </div>
         </div>
@@ -749,6 +756,21 @@
         pdf.save('HackTIX-Booking.pdf');
       });
     });
+
+    // const data = JSON.parse(localStorage.getItem("pemesanan"));
+
+    // if (data && data.pesawatDipilih) {
+    //   const pesawat = data.pesawatDipilih;
+    //   const jamTiba = pesawat.jamTiba || "Tidak tersedia";
+
+    //   console.log("Jam Tiba:", jamTiba);
+
+    //   document.getElementById("summaryInfo").innerHTML = `
+    //     <div>Jam Tiba: ${jamTiba}</div>
+    //   `;
+    // } else {
+    //   console.error("Data pemesanan tidak ditemukan.");
+    // }
   </script>
   <script src="data.js"></script>
 </body>

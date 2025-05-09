@@ -33,41 +33,163 @@ body {
 /* Header */
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 7%;
-    background-color: rgba(255, 255, 255, 0);
-    border-bottom: 1px solid rgb(152, 152, 152);
-    /* background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg); */
-    border-radius: 0px 0px 16px 16px ;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 7%;
+  border-bottom: none;
+  border-radius: 0px 0px 16px 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: transparent; /* Warna awal */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.header-title {
-    font-size: 32px;
-    color: white;
+
+.header.scrolled {
+  background-color: #1a5e92; /* Warna setelah di-scroll */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
 }
+
+.header-title span3 {
+  color: #ffffff; /* Biru tua */
+  font-weight: 600; /* Bold */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);  /* Bayangan teks */
+  font-size: 40px; /* Ukuran font */
+}
+.header.scrolled .header-title span3 {
+  color: #2270B5; /* Biru tua */
+   background: linear-gradient(270deg, #007bff, #00c6ff, #007bff);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 5s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .header-title span {
-    color: #000000;
-    font-size: 30px;
+    color: #fff; /* Biru tua */
+    font-weight: 200; /* Bold */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);  /* Bayangan teks */
+    font-size: 30px; /* Ukuran font */
+}
+.header.scrolled .header-title span {    
+  color: #2270B5; /* Biru tua */
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+}
+.header-title span2 {
+    color: #2270B5; /* Biru tua */
+    font-weight: 200; /* Bold */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);  /* Bayangan teks */
+    font-size: 40px; /* Ukuran font */
+}
+.header.scrolled .header-title span2 {
+  color: #2270B5; /* Biru tua */
+    font-weight: 600; /* Bold */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  /* Bayangan teks */
+    font-size: 40px; /* Ukuran font */
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+}
+
+.header {
+  background-color: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: white; /* Warna navbar setelah di-scroll */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
 }
 .navbar a{
-    color: rgb(0, 0, 0);
+    color: white;
     font-size: 14px;
     display: inline-block;
     margin-left: 550px;
 }
 .navbar a:hover {
-    color: #989898;
+    color: #ffffff;
 }
+
 .fontArial {
     font-family: Arial, Helvetica, sans-serif;
 }
+/* button atas */
+.btnAtas {
+  padding: 12px 18px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btnAtas:active {
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+.btnAtas:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
 
+.btnAtas:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+#pesanTiket, #signInBtn {
+  padding: 12px 18px;
+  background-color: transparent; /* Warna awal */
+  color: white;
+  transition: color 0.3s ease, background-color 0.3s ease;
+
+}
+
+.scrolled #pesanTiket, .scrolled #signInBtn {
+  padding: 12px 18px;
+  color: #2270B5; /* Warna biru */
+  background-color: white; /* Latar belakang putih */
+  border: 1px solid #2270B5; /* Border biru */
+  border-radius: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #2270B5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+}
+.btn-primary:hover {
+  background-color: #e5e5e5;
+  color: #2270B5;
+  border: 1px solid #2270B5;
+  transition: all 0.3s ease;
+}
+.btn-primary:active {
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
 /* Page 1 */
 /* Banner */
 .banner {
@@ -75,7 +197,8 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg);
+    background-image: url(Asset/Image/viewssss.jpg);
+    background-color: var(--bg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -89,15 +212,85 @@ body {
     height: 100%;
     background: linear-gradient(0deg,rgb(225, 225, 225)3%, rgba(68, 68, 68, 0)18%);
 }
-.content {
-    padding: 1.4rem 7%;
-    max-width: 60rem;
+.banner2 {
+  color: white;
+  min-height: 100vh; /* Pastikan tinggi minimum 100% dari viewport */
+  width: 100%; /* Pastikan lebar 100% */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Pusatkan konten secara horizontal */
+  background-image: url(Asset/Image/niagara.jpg);
+  background-color: var(--bg);
+  background-repeat: no-repeat;
+  background-size: cover; /* Pastikan gambar menutupi seluruh area */
+  background-position: center; /* Pusatkan gambar */
+  position: relative;
+  overflow: hidden; /* Pastikan tidak ada elemen yang keluar */
 }
+
+.banner2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background: linear-gradient(
+    to bottom,
+    #e2e2e2 0%,               /* Warna latar atas (menyatu) */
+    rgba(255, 255, 255, 0.8) 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+.banner2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgb(225, 225, 225)3%, rgba(68, 68, 68, 0)18%);
+}
+.banner2 .content {
+  position: relative;
+  z-index: 2; /* Pastikan konten berada di atas lapisan gradient */
+  text-align: center;
+  padding: 0 20px; /* Tambahkan padding untuk konten */
+}
+.banner2 > * {
+  position: relative;
+  z-index: 2;
+}
+
+
 .content h1{
-    font-size: 32px;
+  font-size: 80px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  animation: fadeInUp 1s ease-out;
+  padding-top: 3rem;
+  margin-left: 100px;
 }
 .content p{
-    font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: #f5f5f5;
+  margin-top: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1.5s ease-out;
+  margin-left: 105px;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* preview liburan */
@@ -124,8 +317,16 @@ body {
   max-width: 360px;
   max-height: 240px;
   align-items: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  
 }
-
+.p-vidio video:hover{
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
 /* Pemesanan Tiket */
 
 .pemesanan{
@@ -138,7 +339,7 @@ body {
     padding: 50px;
     font-size: 28px;
     background-color: rgb(34, 112, 181,75%);
-    background-image: url(Asset/Image/raissa-lara-lutolf-fasel-2mrb8RCUCxc-unsplash.jpg);
+    background-image: transparent;
     border-radius: 20px;
     margin: 0 auto 0 auto;
     }
@@ -322,22 +523,22 @@ body {
     
     /* button checkout */
     .pesan-tiket-btn {
-        background: var(--defult);
-        color: rgb(255, 255, 255);
-        font-size: 16px;
-        font-weight: 200;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 10px;
-        min-width: 20%;
-        margin-top: 35px;
-        margin-left: 40%;
-        cursor: pointer;
-        transition: 0.3s;
-        display: block;
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.4s ease, transform 0.2s ease;
         } 
-    .cpesan-tiket :hover {
-        background-color: #e5e5e5;
+    .pesan-tiket-btn:hover {
+      background-color: #004b99;
+      transform: scale(1.02);
         }
 /* Page 1 */
 
@@ -397,9 +598,14 @@ body {
   background-color: white;
   padding: 20px;
   margin: 30px 0;
-  border: 1px solid #d8d0d0;
-  border-radius: 10px;
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.605);
+  border-radius: 15px; /* Membuat sudut lebih melengkung */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flight-card:hover {
+  transform: translateY(-5px); /* Efek hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
 }
 
 .flight-card h3 {
@@ -520,4 +726,3 @@ body {
   border-radius: 20px;
   margin: 0 auto 0 auto;
   }
-      
